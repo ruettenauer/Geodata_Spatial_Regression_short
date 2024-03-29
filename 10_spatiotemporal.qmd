@@ -1,0 +1,292 @@
+
+\newcommand{\Exp}{\mathrm{E}}
+\newcommand\given[1][]{\:#1\vert\:}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\rank}{\mathrm{rank}}
+\newcommand{\bm}[1]{\boldsymbol{\mathbf{#1}}}
+\newcommand{\Prob}{\mathrm{Prob}}
+
+# Spatio-temporal models
+
+
+### Required packages {.unnumbered}
+
+```{r, message = FALSE, warning = FALSE, results = 'hide'}
+pkgs <- c("sf", "mapview", "spdep", "spatialreg", "tmap", "viridisLite", 
+          "plm", "splm", "SDPDmod")
+lapply(pkgs, require, character.only = TRUE)
+
+```
+
+### Session info {.unnumbered}
+
+```{r}
+sessionInfo()
+
+```
+
+
+@Elhorst.2014 provides a comprehensive introduction to spatial panel data methods. Article length introduction to spatial panel data models (FE and RE) can be found in @Elhorst.2012, @Millo.2012 and @Croissant.2018. @LeSage.2014b discusses Bayesian panel data methods.
+
+Note that we will only discuss some basics here, as the complete econometrics of these models and their estimation strategy become insanely complicated [@Lee.2010].
+
+## Static panel data models
+
+The idea behind a static panel data with auto-regressive term is similar to the cross sectional situation [@Millo.2012].
+
+
+$$
+		{\bm y}= \rho(\bm I_T\otimes {\bm W_N}){\bm y}+{\bm X}{\bm \beta}+ {\bm u}.
+$$	
+
+where $\otimes$ is the Kronecker product (block-wise multiplication).
+
+$$
+\begin{split}
+\underbrace{\underbrace{\bm I_T}_{T \times T} \otimes \underbrace{\bm W_N}_{N \times N}}_{NT \times NT}=
+\begin{pmatrix}
+      1 & 0 & \cdots & 0  \\
+      0 & 1 & \cdots & 0  \\
+      \vdots & \vdots & \ddots & \vdots \\
+      0 & 0 & \cdots & 1
+\end{pmatrix}
+\left[\begin{array}{cccc}
+v_{1} w_{1} & v_{1} w_{2} & \cdots & v_{1} w_{m} \\
+v_{2} w_{1} & v_{2} w_{2} & \cdots & v_{2} w_{m} \\
+\vdots & \vdots & \ddots & \vdots \\
+v_{n} w_{1} & v_{n} w_{2} & \cdots & v_{n} w_{m}
+\end{array}\right] =\\
+\begin{pmatrix}
+      \left[\begin{array}{cccc}
+v_{1} w_{1} & v_{1} w_{2} & \cdots & v_{1} w_{m} \\
+v_{2} w_{1} & v_{2} w_{2} & \cdots & v_{2} w_{m} \\
+\vdots & \vdots & \ddots & \vdots \\
+v_{n} w_{1} & v_{n} w_{2} & \cdots & v_{n} w_{m}
+\end{array}\right] & 0 & \cdots & 0  \\
+      0 & \left[\begin{array}{cccc}
+v_{1} w_{1} & v_{1} w_{2} & \cdots & v_{1} w_{m} \\
+v_{2} w_{1} & v_{2} w_{2} & \cdots & v_{2} w_{m} \\
+\vdots & \vdots & \ddots & \vdots \\
+v_{n} w_{1} & v_{n} w_{2} & \cdots & v_{n} w_{m}
+\end{array}\right] & \cdots & 0  \\
+      \vdots & \vdots & \ddots & \vdots \\
+      0 & 0 & \cdots & \left[\begin{array}{cccc}
+v_{1} w_{1} & v_{1} w_{2} & \cdots & v_{1} w_{m} \\
+v_{2} w_{1} & v_{2} w_{2} & \cdots & v_{2} w_{m} \\
+\vdots & \vdots & \ddots & \vdots \\
+v_{n} w_{1} & v_{n} w_{2} & \cdots & v_{n} w_{m}
+\end{array}\right]
+\end{pmatrix}
+\end{split}
+$$
+
+Here we model only spatial dependence within each cross-section and multiply the same spatial weights matrix $T$ times. Off block-diagonal elements are all zero. So there is no spatial dependence that goes across time.
+
+The error term can be decomposed into two parts:
+
+$$
+		{\bm u}= (\bm \iota_T \otimes {\bm I_N})\bm \mu+ {\bm \nu},
+$$
+
+where $\bm \iota_T$ is a $T \times 1$ vector of ones, ${\bm I_N}$ an $N \times N$ identity matrix, $\bm \mu$ is a vector of time-invariant individual specific effects (not spatially autocorrelated).
+
+We could obviously extent the specification to allow for error correlation by specifying
+
+$$
+		{\bm \nu}= \lambda(\bm I_T \otimes {\bm W_N})\bm \nu + {\bm \varepsilon}.
+$$
+
+The individual effects can be treated as fixed or random.
+
+__Fixed Effects__
+
+In the FE model, the individual specific effects are treated as fixed. If we re-write the equation above, we derive at the well-know fixed effects formula with an additional spatial autoregressive term: 
+
+$$
+		{y_{it}}= \rho\sum_{j=1}^Nw_{ij}y_{jt} + \bm x_{it}\bm\beta + \mu_i + \nu_{it},
+$$
+where $\mu_i$ denote the individual-specific fixed effects.
+
+As with the standard spatial lag model, we cannot rely on the OLS estimator because of the simultaneity problem. The coefficients are thus estimated by maximum likelihood [@Elhorst.2014].
+
+__Random Effects__
+
+In the RE model, the individual specific effects are treated as components of the error $\mu \sim \mathrm{IID}(o, \sigma_\mu^2)$. The model can then be written as
+
+$$
+\begin{split}
+		{\bm y}= \rho(\bm I_T\otimes {\bm W_N}){\bm y}+{\bm X}{\bm \beta}+ {\bm u}, \\
+		{\bm u}= (\bm \iota_T \otimes {\bm I_N})\bm \mu+ [\bm I_T \otimes (\bm I_N -  \lambda{\bm W_N})]^{-1} {\bm \varepsilon}.
+\end{split}		
+$$	
+
+As with the conventional random effects model, we make the strong assumption that the unobserved individual
+effects are uncorrelated with the covariates $\bm X$ in the model.
+
+## Dynamic panel data models
+
+Relying on panel data and repeated measures over time, comes with an additional layer of dependence / autocorrelation between units. We have spatial dependence (with its three potential sources), and we have temporal/serial dependence within each unit over time.
+
+A general dynamic model would account for all sources of potential dependence, including combinations [@Elhorst.2012]. The most general model can be written as:
+
+$$
+\begin{split}
+		{\bm y_t}=& \tau \bm y_{t-1} + \rho(\bm I_T\otimes {\bm W_N}){\bm y}_t
+		+ \gamma(\bm I_T\otimes {\bm W_N}){\bm y_{t-1}}\\
+		&~+ {\bm X}{\bm \beta}+ (\bm I_T\otimes {\bm W_N}){\bm X}{\bm \theta}+ {\bm u}_t,\\
+		{\bm u_t}=&  + (\bm \iota_T \otimes {\bm I_N})\bm \mu+ {\bm \nu_t},\\
+		{\bm \nu_t}=& \psi{\bm \nu}_{t-1} + \lambda(\bm I_T \otimes {\bm W_N})\bm \nu + {\bm \varepsilon},
+\end{split}		
+$$	
+
+Where ${\bm X}$ could further contain time-lagged covariates. Compared to the static spatial panel model, we have introduced temporal dependency in the outcome $\tau \bm y_{t-1}$ and the spatially lagged outcome $\gamma(\bm I_T\otimes {\bm W_N}){\bm y_{t-1}}$, and in the error term $\psi{\bm \nu}_{t-1}$.
+
+### Impacts in spatial panel models
+
+Note that similar to the distinction between local and global spillovers, we now have to distinguish between short-term and long-term effects. A change in $\bm X_t$ no influences focal $Y$ and neighbour's $Y$ but also contemporaneous $Y$ and future $Y$.
+
+While the short-term effects are the known impacts
+
+$$
+\frac{\partial {\bm y}}{\partial {\bm x}_k} = ({\bm I}-\rho{\bm W_{NT}})^{-1}\left[\beta_k+{\bm W_{NT}}\theta_k\right].
+$$
+
+The long-term impacts, by contrast, additionally account for the effect multiplying through time  
+
+$$
+\frac{\partial {\bm y}}{\partial {\bm x}_k} = [(1-\tau){\bm I}-(\rho+\gamma){\bm W_{NT}}]^{-1}\left[\beta_k+{\bm W_{NT}}\theta_k\right].
+$$
+
+For more information see @Elhorst.2012.
+
+![Summary impact measures in dynamic spatial panel models [@Elhorst.2012]](fig/Elhorst_panel.PNG)
+
+## Example: Local employment impacts of immigration
+
+@Fingleton.2020: Estimating the local employment impacts of immigration: A dynamic spatial panel model. Urban Studies, 57(13), 2646–2662. https://doi.org/10.1177/0042098019887916
+
+_This paper highlights a number of important gaps in the UK evidence base on the employment impacts of immigration, namely: (1) the lack of research on the local impacts of immigration – existing studies only estimate the impact for the country as a whole; (2) the absence of long-term estimates – research has focused on relatively short time spans – there are no estimates of the impact over several decades, for example; (3) the tendency to ignore spatial dependence of employment which can bias the results and distort inference – there are no robust spatial econometric estimates we are aware of._
+
+_We illustrate our approach with an application to London and find that no migrant group has a statistically significant long-term negative effect on employment. EU migrants, however, are found to have a significant positive impact, which may have important implications for the Brexit debate. Our approach opens up a new avenue of inquiry into subnational variations in the impacts of immigration on employment._
+
+![Impacts on employment, @Fingleton.2020](fig/Fingleton.PNG)
+
+
+## Estimation in R
+
+To estimate spatial panel models in R, we can use the `splm` package of @Millo.2012.
+
+We use a standard example with longitudinal data from the `plm` package here.
+
+```{r}
+data(Produc, package = "plm")
+data(usaww)
+
+head(Produc)
+
+usaww[1:10, 1:10]
+```
+
+
+`Produc` contains data on US States Production - a panel of 48 observations from 1970 to 1986. `usaww` is a spatial weights matrix of the 48 continental US States based on the queen contiguity relation.
+
+Let start with an FE SEM model, using function `spml()` for maximum likelihood estimation of static spatial panel models.
+
+```{r}
+
+# Gen listw object
+usalw <- mat2listw(usaww, style = "W")
+
+# Spec formula
+fm <- log(gsp) ~ log(pcap) + log(pc) + log(emp) + unemp
+
+### Esimate FE SEM model
+semfe.mod <- spml(formula = fm, data = Produc, 
+                  index = c("state", "year"),  # ID column
+                  listw = usalw,          # listw
+                  model = "within",       # one of c("within", "random", "pooling").
+                  effect = "individual",  # type of fixed effects
+                  lag = FALSE,            # spatila lg of Y
+                  spatial.error = "b",    # "b" (Baltagi), "kkp" (Kapoor, Kelejian and Prucha)
+                  method = "eigen",       # estimation method, for large data e.g. ("spam", "Matrix" or "LU")
+                  na.action = na.fail,    # handling of missings
+                  zero.policy = NULL)     # handling of missings
+
+summary(semfe.mod)
+
+```
+
+
+A RE SAR model, by contrast, can be estimated using the following options:
+
+```{r}
+
+### Estimate an RE SAR model
+sarre.mod <- spml(formula = fm, data = Produc, 
+                  index = c("state", "year"),  # ID column
+                  listw = usalw,          # listw
+                  model = "random",       # one of c("within", "random", "pooling").
+                  effect = "individual",  # type of fixed effects
+                  lag = TRUE,             # spatila lg of Y
+                  spatial.error = "none", # "b" (Baltagi), "kkp" (Kapoor, Kelejian and Prucha)
+                  method = "eigen",       # estimation method, for large data e.g. ("spam", "Matrix" or "LU")
+                  na.action = na.fail,    # handling of missings
+                  zero.policy = NULL)     # handling of missings
+
+summary(sarre.mod)
+```
+
+Note that @Millo.2012 use a different notation, namely $\lambda$ for lag dependence, and $\rho$ for error dependence.... 
+
+Again, we have to use an additional step to get impacts for SAR-like models.
+
+```{r}
+# Number of years
+T <- length(unique(Produc$year))
+
+# impacts
+sarre.mod.imp <- impacts(sarre.mod,
+                         listw = usalw,
+                         time = T)
+summary(sarre.mod.imp)                         
+```
+
+
+There is an alternative by using the package `SDPDmod` by Rozeta Simonovska ([see vignette](https://cran.r-project.org/web/packages/SDPDmod/vignettes/spatial_model.html)).
+
+```{r}
+### FE SAR model
+sarfe.mod2 <- SDPDm(formula = fm, 
+                    data = Produc, 
+                    W = usaww,                 
+                    index = c("state","year"), # ID
+                    model = "sar",             # on of c("sar","sdm"),
+                    effect = "individual",     # FE structure
+                    dynamic = FALSE,           # time lags of the dependet variable
+                    LYtrans = TRUE)            # Lee-Yu transformation (bias correction)
+
+summary(sarfe.mod2)
+```
+
+And subsequently, we can calculate the impacts of the model.
+
+```{r}
+# Impats
+sarfe.mod2.imp <- impactsSDPDm(sarfe.mod2, 
+                               NSIM = 200, # N simulations
+                               sd = 12345) # seed
+
+summary(sarfe.mod2.imp)
+```
+
+Note: I did not manage to estimate a dynamic panel model with `SDPDm`.
+
+## Example: Industrial facilities and municipal income
+
+@Ruttenauer.2021b: Environmental Inequality and Residential Sorting in Germany: A Spatial Time-Series Analysis of the Demographic Consequences of Industrial Sites. Demography, 58(6), 2243–2263. https://doi.org/10.1215/00703370-9563077
+
+![Spatial distribution of industrial facilities and income tax revenue per municipality for 2015.](fig/Figure1.png)
+
+
+![](fig/Table1.png)
