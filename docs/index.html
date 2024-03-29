@@ -85,7 +85,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./01_refresher.html" rel="next">
+<link href="./01_refresher_short.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -164,74 +164,8 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01_refresher.html" class="sidebar-item-text sidebar-link">
+  <a href="./01_refresher_short.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Refresher</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./02_spatial-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Manipulation &amp; Visualization</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./03_weights.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Spatial Relationships W</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./04_dependence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Detecting Spatial Dependence</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./05_regression-theory.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Spatial Regression Models</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./06_regression-estimation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Spatial Regression Models: Estimation</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./07_impacts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Spatial Impacts</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./08_exercise1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exercise I</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./09_comparison.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Comparing and Selecting Models</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./10_spatiotemporal.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Spatio-temporal models</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./11_other.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Other Models</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./12_exercise2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Exercise II</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -294,7 +228,7 @@ div.csl-indent {
 
 <section id="introduction" class="level1 unnumbered">
 <h1 class="unnumbered">Introduction</h1>
-<p>This course material is designed for a 1-day GESIS workshop on spatial data analysis. <span class="citation" data-cites="Ruttenauer.2024b">Rüttenauer (<a href="references.html#ref-Ruttenauer.2024b" role="doc-biblioref">2024</a>)</span> is a handbook chapter accompanying these workshop materials.</p>
+<p>This course material is designed for a 1-day GESIS workshop on spatial data analysis. <span class="citation" data-cites="Ruttenauer.2024b">Rüttenauer (<a href="#ref-Ruttenauer.2024b" role="doc-biblioref">2024</a>)</span> is a handbook chapter accompanying these workshop materials.</p>
 <p>In recent years, more and more spatial data has become available, providing the possibility to combine otherwise unrelated data, such as social, economic, and environmental data. This also opens up the possibility of analyzing spatial patterns and processes (e.g., spillover effects or diffusion).</p>
 <p>Many social science research questions are spatially dependent such as voting outcomes, housing prices, labour markets, protest behavior, or migration decisions. Observing an event in one region or neighborhood increases the likelihood that we observe similar processes in proximate areas. As Tobler’s first law of geography puts it: “Everything is related to everything else, but near things are more related than distant things”. This dependence can stem from spatial contagion, spatial spillovers, or common confounders. Therefore, basic assumptions of standard regression models are violated when analyzing spatial data. However, more imoprtantly, spatial processes are interesting for their own sake. Spatial regression models can detect spatial dependence and explicitly model spatial relations, identifying spatial clustering, spillovers or diffusion processes.</p>
 <p>The main objective of the course is the theoretical understanding and practical application of spatial regression models. This course will first give an overview on how to perform common spatial operations using spatial information, such as aggregating spatial units, calculating distances, merging spatial data as well as visualizing them. The course will further focus on the analysis of geographic data and the application of spatial regression techniques to model and analyze spatial processes, and furthermore, the course addresses several methods for defining spatial relationships, detecting and diagnosing spatial dependence and autocorrelation. Finally, we will discuss various spatial regression techniques to model processes, clarify the assumptions of these models, and show how they differ in their applications and interpretations.</p>
@@ -343,24 +277,24 @@ div.csl-indent {
 </section>
 <section id="some-useful-packages" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="some-useful-packages">Some useful packages</h2>
-<p>By now, <em>R</em> provides a lot of functionalities for GIS applications and spatial econometrics, and further extensions. There are lots of packages providing a huge variety of spatial functionalities and methods <span class="citation" data-cites="Bivand.2021">(see e.g. <a href="references.html#ref-Bivand.2021" role="doc-biblioref">R. Bivand, Millo, and Piras 2021</a>)</span>. Important packages for fundamental spatial operations are:</p>
+<p>By now, <em>R</em> provides a lot of functionalities for GIS applications and spatial econometrics, and further extensions. There are lots of packages providing a huge variety of spatial functionalities and methods <span class="citation" data-cites="Bivand.2021">(see e.g. <a href="#ref-Bivand.2021" role="doc-biblioref">R. Bivand, Millo, and Piras 2021</a>)</span>. Important packages for fundamental spatial operations are:</p>
 <ul>
-<li><p>Spatial data workhorses: <a href="https://cran.r-project.org/web/packages/sf/index.html">sf</a> <span class="citation" data-cites="Pebesma.2018">(<a href="references.html#ref-Pebesma.2018" role="doc-biblioref"><strong>Pebesma.2018?</strong></a>)</span> and <a href="https://cran.r-project.org/web/packages/terra/index.html">terra</a></p></li>
-<li><p>Visualization: <a href="https://cran.r-project.org/web/packages/mapview/index.html">mapview</a> <span class="citation" data-cites="Appelhans.2021">(<a href="references.html#ref-Appelhans.2021" role="doc-biblioref"><strong>Appelhans.2021?</strong></a>)</span> and <a href="https://cran.r-project.org/web/packages/tmap/index.html">tmap</a> <span class="citation" data-cites="Tennekes.2018">(<a href="references.html#ref-Tennekes.2018" role="doc-biblioref"><strong>Tennekes.2018?</strong></a>)</span></p></li>
-<li><p>Spatial weights and other relations: <a href="https://cran.r-project.org/web/packages/stars/index.html">spdep</a> <span class="citation" data-cites="Bivand.2018">(<a href="references.html#ref-Bivand.2018" role="doc-biblioref">R. S. Bivand and Rudel 2018</a>)</span></p></li>
-<li><p>Spatial interpolation and kriging: <a href="https://cran.r-project.org/web/packages/gstat/index.html">gstat</a> <span class="citation" data-cites="Graler.2016">(<a href="references.html#ref-Graler.2016" role="doc-biblioref"><strong>Graler.2016?</strong></a>)</span></p></li>
-<li><p>Spatial regression models: <a href="https://cran.r-project.org/web/packages/spatialreg/index.html">spatialreg</a> and <a href="https://cran.r-project.org/web/packages/sphet/index.html">sphet</a> <span class="citation" data-cites="Bivand.2015">(<a href="references.html#ref-Bivand.2015" role="doc-biblioref">R. Bivand and Piras 2015</a>)</span></p></li>
+<li><p>Spatial data workhorses: <a href="https://cran.r-project.org/web/packages/sf/index.html">sf</a> <span class="citation" data-cites="Pebesma.2018">(<a href="#ref-Pebesma.2018" role="doc-biblioref">Pebesma 2018</a>)</span> and <a href="https://cran.r-project.org/web/packages/terra/index.html">terra</a></p></li>
+<li><p>Visualization: <a href="https://cran.r-project.org/web/packages/mapview/index.html">mapview</a> <span class="citation" data-cites="Appelhans.2021">(<a href="#ref-Appelhans.2021" role="doc-biblioref">Appelhans et al. 2021</a>)</span> and <a href="https://cran.r-project.org/web/packages/tmap/index.html">tmap</a> <span class="citation" data-cites="Tennekes.2018">(<a href="#ref-Tennekes.2018" role="doc-biblioref">Tennekes 2018</a>)</span></p></li>
+<li><p>Spatial weights and other relations: <a href="https://cran.r-project.org/web/packages/stars/index.html">spdep</a> <span class="citation" data-cites="Bivand.2018">(<a href="#ref-Bivand.2018" role="doc-biblioref">R. S. Bivand and Rudel 2018</a>)</span></p></li>
+<li><p>Spatial interpolation and kriging: <a href="https://cran.r-project.org/web/packages/gstat/index.html">gstat</a> <span class="citation" data-cites="Graler.2016">(<a href="#ref-Graler.2016" role="doc-biblioref">Gräler, Pebesma, and Heuvelink 2016</a>)</span></p></li>
+<li><p>Spatial regression models: <a href="https://cran.r-project.org/web/packages/spatialreg/index.html">spatialreg</a> and <a href="https://cran.r-project.org/web/packages/sphet/index.html">sphet</a> <span class="citation" data-cites="Bivand.2015">(<a href="#ref-Bivand.2015" role="doc-biblioref">R. Bivand and Piras 2015</a>)</span></p></li>
 <li><p>The packages have constantly developed over the past years, and older packages such as rgdal, rgeos, and sp are currently retiring (<a href="https://geocompx.org/post/2023/rgdal-retirement/">Blog post</a>)</p></li>
 </ul>
 </section>
 <section id="further-readings" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="further-readings">Further Readings</h2>
 <ul>
-<li><p>Great up-to-date introduction to spatial R: <span class="citation" data-cites="Lovelace.2019">Lovelace, Nowosad, and Muenchow (<a href="references.html#ref-Lovelace.2019" role="doc-biblioref">2019</a>)</span>, <a href="https://geocompr.robinlovelace.net/">updated version available online</a></p></li>
-<li><p>Great open-science book on <a href="https://www.r-spatial.org/book">Spatial Data Science</a> <span class="citation" data-cites="Pebesma.2023">Pebesma and Bivand (<a href="references.html#ref-Pebesma.2023" role="doc-biblioref">2023</a>)</span></p></li>
-<li><p>Comprehensive introduction to spatial econometrics: <span class="citation" data-cites="LeSage.2009">LeSage and Pace (<a href="references.html#ref-LeSage.2009" role="doc-biblioref">2009</a>)</span></p></li>
-<li><p>Relative intuitive introduction to spatial econometrics: <span class="citation" data-cites="Ward.2008">Ward and Gleditsch (<a href="references.html#ref-Ward.2008" role="doc-biblioref">2008</a>)</span></p></li>
-<li><p>Article-length introductions to spatial econometrics: <span class="citation" data-cites="Elhorst.2012">Elhorst (<a href="references.html#ref-Elhorst.2012" role="doc-biblioref">2012</a>)</span>, <span class="citation" data-cites="HalleckVega.2015">Halleck Vega and Elhorst (<a href="references.html#ref-HalleckVega.2015" role="doc-biblioref">2015</a>)</span>, <span class="citation" data-cites="LeSage.2014">LeSage (<a href="references.html#ref-LeSage.2014" role="doc-biblioref">2014</a>)</span>, <span class="citation" data-cites="Ruttenauer.2024b">Rüttenauer (<a href="references.html#ref-Ruttenauer.2024b" role="doc-biblioref">2024</a>)</span>, and <span class="citation" data-cites="Ruttenauer.2022a">Rüttenauer (<a href="references.html#ref-Ruttenauer.2022a" role="doc-biblioref">2022</a>)</span></p></li>
+<li><p>Great up-to-date introduction to spatial R: <span class="citation" data-cites="Lovelace.2019">Lovelace, Nowosad, and Muenchow (<a href="#ref-Lovelace.2019" role="doc-biblioref">2019</a>)</span>, <a href="https://geocompr.robinlovelace.net/">updated version available online</a></p></li>
+<li><p>Great open-science book on <a href="https://www.r-spatial.org/book">Spatial Data Science</a> <span class="citation" data-cites="Pebesma.2023">Pebesma and Bivand (<a href="#ref-Pebesma.2023" role="doc-biblioref">2023</a>)</span></p></li>
+<li><p>Comprehensive introduction to spatial econometrics: <span class="citation" data-cites="LeSage.2009">LeSage and Pace (<a href="#ref-LeSage.2009" role="doc-biblioref">2009</a>)</span></p></li>
+<li><p>Relative intuitive introduction to spatial econometrics: <span class="citation" data-cites="Ward.2008">Ward and Gleditsch (<a href="#ref-Ward.2008" role="doc-biblioref">2008</a>)</span></p></li>
+<li><p>Article-length introductions to spatial econometrics: <span class="citation" data-cites="Elhorst.2012">Elhorst (<a href="#ref-Elhorst.2012" role="doc-biblioref">2012</a>)</span>, <span class="citation" data-cites="HalleckVega.2015">Halleck Vega and Elhorst (<a href="#ref-HalleckVega.2015" role="doc-biblioref">2015</a>)</span>, <span class="citation" data-cites="LeSage.2014">LeSage (<a href="#ref-LeSage.2014" role="doc-biblioref">2014</a>)</span>, <span class="citation" data-cites="Ruttenauer.2024b">Rüttenauer (<a href="#ref-Ruttenauer.2024b" role="doc-biblioref">2024</a>)</span>, and <span class="citation" data-cites="Ruttenauer.2022a">Rüttenauer (<a href="#ref-Ruttenauer.2022a" role="doc-biblioref">2022</a>)</span></p></li>
 </ul>
 </section>
 <section id="course-materials" class="level2 unnumbered">
@@ -374,7 +308,10 @@ div.csl-indent {
 
 <!-- -->
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Appelhans.2021" class="csl-entry" role="listitem">
+Appelhans, Tim, Florian Detsch, Chritoph Reudenbach, and Stefan Woellauer. 2021. <span>“Mapview: <span>Interactive Viewing</span> of <span>Spatial Data</span> in <span>R</span>.”</span>
+</div>
 <div id="ref-Bivand.2018" class="csl-entry" role="listitem">
 Bivand, Roger S., and Colin Rudel. 2018. <span>“Rgeos: <span>Interface</span> to <span>Geometry Engine</span> - <span>Open Source</span> (’<span>GEOS</span>’).”</span>
 </div>
@@ -386,6 +323,9 @@ Bivand, Roger, and Gianfranco Piras. 2015. <span>“Comparing <span>Implementati
 </div>
 <div id="ref-Elhorst.2012" class="csl-entry" role="listitem">
 Elhorst, J. Paul. 2012. <span>“Dynamic Spatial Panels: Models, Methods, and Inferences.”</span> <em>Journal of Geographical Systems</em> 14 (1): 5–28. <a href="https://doi.org/10.1007/s10109-011-0158-4">https://doi.org/10.1007/s10109-011-0158-4</a>.
+</div>
+<div id="ref-Graler.2016" class="csl-entry" role="listitem">
+Gräler, Benedikt, Edzer Pebesma, and Gerard Heuvelink. 2016. <span>“Spatio-<span>Temporal Interpolation</span> Using Gstat.”</span> <em>The R Journal</em> 8 (1): 204–18.
 </div>
 <div id="ref-HalleckVega.2015" class="csl-entry" role="listitem">
 Halleck Vega, Solmaria, and J. Paul Elhorst. 2015. <span>“The <span>SLX Model</span>.”</span> <em>Journal of Regional Science</em> 55 (3): 339–63. <a href="https://doi.org/10.1111/jors.12188">https://doi.org/10.1111/jors.12188</a>.
@@ -399,6 +339,9 @@ LeSage, James P., and R. Kelley Pace. 2009. <em>Introduction to <span>Spatial Ec
 <div id="ref-Lovelace.2019" class="csl-entry" role="listitem">
 Lovelace, Robin, Jakub Nowosad, and Jannes Muenchow. 2019. <em>Geocomputation with <span>R</span></em>. 1st ed. Chapman &amp; <span>Hall</span>/<span>CRC</span> the <span>R</span> Series. <span>Boca Raton</span>: <span>Chapman &amp; Hall/CRC</span>.
 </div>
+<div id="ref-Pebesma.2018" class="csl-entry" role="listitem">
+Pebesma, Edzer. 2018. <span>“Simple Features for <span>R</span>: <span>Standardized</span> Support for Spatial Vector Data.”</span> <em>The R Journal</em> 10 (1): 439. <a href="https://doi.org/10.32614/RJ-2018-009">https://doi.org/10.32614/RJ-2018-009</a>.
+</div>
 <div id="ref-Pebesma.2023" class="csl-entry" role="listitem">
 Pebesma, Edzer, and Roger Bivand. 2023. <em>Spatial <span>Data Science</span>: <span>With Applications</span> in <span>R</span></em>. First. <span>Boca Raton</span>: <span>Chapman and Hall/CRC</span>. <a href="https://doi.org/10.1201/9780429459016">https://doi.org/10.1201/9780429459016</a>.
 </div>
@@ -407,6 +350,9 @@ Rüttenauer, Tobias. 2022. <span>“Spatial <span>Regression Models</span>: <spa
 </div>
 <div id="ref-Ruttenauer.2024b" class="csl-entry" role="listitem">
 ———. 2024. <span>“Spatial <span>Data Analysis</span>.”</span> <span>arXiv</span>. <a href="https://arxiv.org/abs/2402.09895">https://arxiv.org/abs/2402.09895</a>.
+</div>
+<div id="ref-Tennekes.2018" class="csl-entry" role="listitem">
+Tennekes, Martijn. 2018. <span>“Tmap : <span>Thematic Maps</span> in <span>R</span>.”</span> <em>Journal of Statistical Software</em> 84 (6). <a href="https://doi.org/10.18637/jss.v084.i06">https://doi.org/10.18637/jss.v084.i06</a>.
 </div>
 <div id="ref-Ward.2008" class="csl-entry" role="listitem">
 Ward, Michael Don, and Kristian Skrede Gleditsch. 2008. <em>Spatial <span>Regression Models</span></em>. Vol. 155. Quantitative <span>Applications</span> in the <span>Social Sciences</span>. <span>Thousand Oaks</span>: <span>Sage</span>.
@@ -704,7 +650,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01_refresher.html" class="pagination-link">
+      <a href="./01_refresher_short.html" class="pagination-link">
         <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Refresher</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>

@@ -9,7 +9,7 @@ book:
   repo-url: https://github.com/ruettenauer/Geodata_Spatial_Regression_short/
   chapters:
     - index.qmd
-    - 01_refresher.qmd
+    - 01_refresher_short.qmd
     # - 02_spatial-data.qmd
     # - 03_weights.qmd
     # - 04_dependence.qmd
