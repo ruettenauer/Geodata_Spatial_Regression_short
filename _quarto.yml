@@ -42,6 +42,4 @@ format:
         out.width: 100%
         R.options:
           width: 68
-  pdf:
-    documentclass: scrreprt
     

@@ -61,3 +61,6 @@ By now, *R* provides a lot of functionalities for GIS applications and spatial e
 -   For those looking for a more in-depth introduction, I highly recommend Roger Bivand's course on Spatial Data Analysis: [Youtube recordings](https://www.youtube.com/watch?v=KkIbg50Pa0I&list=PLXUoTpMa_9s10NVk4dBQljNOaOXAOhcE0), [Course Materials](https://rsbivand.github.io/ECS530_h19/)
 
 -   I've learned most of what I know about spatial econometrics from [Scott J. Cook](http://www.scottjcook.net/) and his workshop on Spatial Econometrics at the [Essex Summer school](https://essexsummerschool.com/summer-school-facts/courses/ess-2023-course-list/).
+
+
+## References {.unnumbered}
