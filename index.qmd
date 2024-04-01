@@ -63,4 +63,3 @@ By now, *R* provides a lot of functionalities for GIS applications and spatial e
 -   I've learned most of what I know about spatial econometrics from [Scott J. Cook](http://www.scottjcook.net/) and his workshop on Spatial Econometrics at the [Essex Summer school](https://essexsummerschool.com/summer-school-facts/courses/ess-2023-course-list/).
 
 
-## References {.unnumbered}

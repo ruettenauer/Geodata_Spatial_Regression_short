@@ -726,4 +726,3 @@ gp
   
 5) Can you create a plot with the distance to the city centre and pub counts next to each other?  
 
-## References {.unnumbered}

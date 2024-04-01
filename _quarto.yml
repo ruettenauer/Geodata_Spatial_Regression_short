@@ -11,12 +11,13 @@ book:
     - index.qmd
     - 01_refresher_short.qmd
     # - 02_spatial-data.qmd
-    # - 03_weights.qmd
+    - 03_weights_short.qmd
+    - 04_exercise1_short.qmd
     # - 04_dependence.qmd
-    # - 05_regression-theory.qmd
+    - 05_regression-theory_short.qmd
     # - 06_regression-estimation.qmd
-    # - 07_impacts.qmd
-    # - 08_exercise1.qmd
+    - 07_impacts_short.qmd
+    - 08_exercise2_short.qmd
     # - 09_comparison.qmd
     # - 10_spatiotemporal.qmd
     # - 11_other.qmd

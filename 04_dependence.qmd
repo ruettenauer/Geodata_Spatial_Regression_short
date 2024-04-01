@@ -387,7 +387,7 @@ k10.nb <- knearneigh(coords, k = 10)
 ```
 
 
-2. Can you create a map containing the City of London (MSOA11CD = "E02000001") and its then nearest neighbours?
+2. Can you create a map containing the City of London (MSOA11CD = "E02000001") and its ten nearest neighbours?
 
 ```{r}
 i <- which(msoa.spdf$MSOA11CD == "E02000001")

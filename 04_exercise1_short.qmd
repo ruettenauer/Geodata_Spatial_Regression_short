@@ -1,0 +1,60 @@
+\newcommand{\Exp}{\mathrm{E}}
+\newcommand\given[1][]{\:#1\vert\:}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\rank}{\mathrm{rank}}
+\newcommand{\bm}[1]{\boldsymbol{\mathbf{#1}}}
+
+# Exercise I
+
+### Required packages {.unnumbered}
+
+```{r, message = FALSE, warning = FALSE, results = 'hide'}
+pkgs <- c("sf", "mapview", "spdep", "spatialreg", "tmap", "viridisLite") # note: load spdep first, then spatialreg
+lapply(pkgs, require, character.only = TRUE)
+
+```
+
+### Session info {.unnumbered}
+
+```{r}
+sessionInfo()
+
+```
+
+### Reload data from pervious session {.unnumbered}
+
+```{r}
+load("_data/msoa2_spatial.RData")
+```
+
+
+
+## General Exercises
+
+1. Please calculate a neighbours weights matrix of the nearest 10 neighbours (see `spdep::knearneigh()`), and create a listw object using row normalization.
+
+
+2. Can you create a map containing the City of London (MSOA11CD = "E02000001") and its ten nearest neighbours?
+
+
+
+3. Chose another characteristics from the data (e.g. ethnic groups or house prices) and calculate global Moran's I for it.
+
+
+4. Produce a LISA cluster map for the characteristic you have chosen.
+
+
+
+## Environmental inequality
+
+How would you investigate the following descriptive research question: Are ethnic (and immigrant) minorities in London exposed to higher levels of pollution? Also consider the spatial structure. What's your dependent and what's your independent variable?
+
+### 1) Define a neigbours weights object of your choice {.unnumbered}
+
+You can choose any preferred neighbours-weights definition, such as for instance contiguity neighbours or all neighbourhoods within 2.5km. 
+
+
+### 2) Estimate the extent of spatial auto-correlation {.unnumbered}
+
+The most common way would be to calculate Global Moran's I.
