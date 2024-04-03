@@ -55,6 +55,9 @@ mod_1.slx <- lmSLX(log(med_house_price) ~ log(no2) + log(POPDEN) +
 ```
 
 
+![](fig/Graph.jpg)
+
+
 ## Coefficient estimates $\neq$ `marginal' effects
 
 ::: callout-warning
