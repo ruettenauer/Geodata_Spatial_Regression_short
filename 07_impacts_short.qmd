@@ -4,6 +4,10 @@
 \newcommand{\Var}{\mathrm{Var}}
 \newcommand{\rank}{\mathrm{rank}}
 \newcommand{\bm}[1]{\boldsymbol{\mathbf{#1}}}
+\newcommand{\tr}{\mathrm{tr}}
+\newcommand{\irow}[1]{%
+\begin{pmatrix}#1\end{pmatrix}
+}
 
 # Spatial Impacts
 
@@ -604,3 +608,11 @@ Some argue that the best way of choosing the appropriate model specification is 
   
 2) Theoretical mechanisms may guide the choice of either global or local spillover effects.
 
+
+### SLX is robust
+
+@Ruttenauer.2022a provides Monte Carlo experiments on how different spatial models perform under different scenarios of misspecification. SLX - despite its simplicity - does a very good job even if it is the wrong model for the specific situation. I personally advice for SLX (or SDEM) as the most useful specification. 
+
+Having a spatially lagged depend variable comes with an extra layer of complexity. I suggest to only use these models if you have strong a-priori reasons to believe that it is the correct specification for your study.
+
+![Bias of impacts and 95\% confidence interval of empirical standard deviation without omv: ${\bm \beta}=(0.2, 0.5)^\intercal$, ${\bm \gamma}=(0, 0)^\intercal$. $\rho=$ autocorrelation in the dependent variable ($\bm W \bm y$); $\bm \delta=$ autocorrelation in the covariates ($\bm x_k = f(\bm W \bm  x_k)$); $\lambda=$ autocorrelation in the disturbances ($\bm W \bm u$); $\bm \theta=$ spatial spillover effects of covariates ($\bm W \bm X$); $\bm\gamma=$ strength of omv.](fig/sim4_combined_1.png)
