@@ -480,3 +480,127 @@ _This study investigates the presence of environmental inequality in Germany - t
 
 _Results reveal that the share of minorities within a census cell indeed positively correlates with the exposure to industrial pollution. Furthermore, spatial spillover effects are highly relevant: the characteristics of the neighbouring spatial units matter in predicting the amount of pollution. Especially within urban areas, clusters of high minority neighbourhoods are affected by high levels of environmental pollution._
 
+
+
+
+
+## Comparing and Selecting Models 
+
+
+As we have seen, a variety of spatial model specifications exist that can be used to account for the spatial structure of the data. Thus, selecting the correct model specification remains a crucial task in applied research.
+
+One way of selecting the model specification is the application of empirical specification tests. In general, there are two different strategies: a specific-to-general or a general-to-specific approach [@Florax.2003; @Mur.2009].
+
+### Specific-to-general
+
+The specific-to-general approach is more common in spatial econometrics. This approach starts with the most basic non-spatial model and tests for possible misspecifications due to omitted autocorrelation in the error term or the dependent variable.
+
+@Anselin.1996 proposed to use Lagrange multiplier (LM) tests for the hypotheses $H_0$: $\lambda=0$ and $H_0$: $\rho=0$, which are robust against the alternative source of spatial dependence.
+
+#### Lagrange Multiplier Test
+
+We have earlier talked about methods to detect auto-correlation -- visualisation and Moran's I. Both methodscan tell us that there is spatial autocorrelation. However, both method do not provide any information on why there is autocorrelation. Possible reasons:
+
+-  Interdependence ($\rho$)
+-  Clustering on unobservables ($\lambda$)
+-  Spillovers in covariates ($\bm \theta$)
+		
+Lagrange Multiplier test [@Anselin.1996]:
+
+- (Robust) test for spatial lag dependence $LM_\rho^*$
+
+- (Robust) test for spatial error dependence $LM_\lambda^*$
+		
+Robust test for lag dependence: $H_0$: $\rho=0$ 
+$$
+		LM_\rho^* = G^{-1} \hat{\sigma}_\epsilon^2
+		\big(\frac{ \hat{\bm\epsilon}^\intercal \bm{Wy}}{\hat{\sigma}_\epsilon^2}
+		- \frac{\hat{\bm \epsilon}^\intercal \bm{W\hat{\epsilon}}}{\hat{\sigma}_\epsilon^2} \big)^2 \sim \chi^2 
+$$
+			<!-- %\\ \text{where } G = (\bm{WX\hat{\beta}})^\intercal (\bm I - \bm X (\bm X^\intercal\bm X)^{-1} \bm X^\intercal) (\bm{WX\hat{\beta}}) -->
+
+Robust test for error dependence: $H_0$: $\lambda=0$ 
+
+$$
+		LM_\lambda^* = \frac{
+		\big( \hat{\bm\epsilon}^\intercal \bm{W\hat{\epsilon}} / \hat{\sigma}_\epsilon^2		
+		- [T\hat{\sigma}_\epsilon^2(G + T\hat{\sigma}_\epsilon^2)^{-1}]
+		 \hat{\bm\epsilon}^\intercal \bm{Wy} / \hat{\sigma}_\epsilon^2 \big)^2
+		}{
+		T[1 - \frac{\hat{\sigma}_\epsilon^2}{G + \hat{\sigma}_\epsilon^2}]
+		} \sim \chi^2
+$$
+with
+$$
+\begin{split}
+	 G &= (\bm{WX\hat{\beta}})^\intercal (\bm I - \bm X (\bm X^\intercal\bm X)^{-1} \bm X^\intercal) (\bm{WX\hat{\beta}})   \\
+	 T &= \tr[(\bm W^\intercal + \bm W)\bm W], 
+\end{split}		
+$$
+where $\tr(\bm A)$ is the sum of the main diagonal of any square matrix $\bm A$.
+		
+#### Problem
+
+The specific-to-general approach based on the robust LM test offers a good performance in distinguishing between SAR, SEM, and non-spatial OLS [@Florax.2003]. 
+
+Still, in their original paper, @Anselin.1996 already note the declining power of the robust LM$_\lambda$ test for spatial error dependence with increasing autocorrelation in the dependent variable (indicating some uncertainty under a SAC-like DGP).
+
+@Mur.2009 demonstrate strong drawbacks of the specific-to-general approach under non-optimal conditions like heteroscedasticity or endogeneity.
+
+Moreover, the test disregard the presence of spatial dependence from local spillover effects ($\theta$ is assumed to be zero), as resulting from an SLX-like process. @Cook.2020, for instance, show theoretically that an SLX-like dependence structure leads to the rejection of both hypotheses $H_0$: $\lambda=0$ and $H_0$: $\rho=0$, though no autocorrelation is present [@Elhorst.2017; @Ruttenauer.2022a].
+
+
+### General-to-specific approach
+
+The general-to-specific approach depicts the opposite method of specification search. This approach starts with the most general model and stepwise imposes restrictions on the parameters of this general model. 
+
+![@HalleckVega.2015: Nesting of different Spatial Econometric Model Specifications](fig/Vega.png)
+
+In theory, we would 
+
+1) start with a GNS specification and 
+
+2) subsequently restrict the model to simplified specifications based on the significance of parameters in the GNS. 
+
+The problem with this strategy is that the GNS is only weakly identified and, thus, is of little help in selecting the correct restrictions \citep{Burridge.2016}. 
+
+The most intuitive alternative would be to start with one of the two-source models SDM, SDEM, or SAC. This, however, bears the risk of imposing the wrong restriction in the first place [@Cook.2020]. Furthermore, @Cook.2020 show that more complicated restrictions are necessary to derive all single-source models from SDEM or SAC specifications.
+
+### General advice?
+
+@LeSage.2009, @LeSage.2014, @Elhorst.2014 argue that there are strong analytical reasons to restrict the model specifications to a subset, as the SDM subsumes the SLX and SAR model, and the SDEM subsumes SLX and SEM. 
+
+It is easily observed that SDM reduces to SLX if $\rho=0$ and to SAR if ${\bm \theta}=0$, while the SDEM reduces to SLX if $\lambda=0$ and to SEM if ${\bm \theta}=0$. Less intuitively, [@Anselin.1988] has also shown that the SDM subsumes the SEM. Therefore, we can express the reduced form and rearrange terms:
+
+$$
+\begin{split}
+{\bm y}&= {\bm X}{\bm \beta} + ({\bm I_N}-\lambda {\bm W})^{-1}{\bm \varepsilon} \\
+({\bm I_N}-\lambda {\bm W}){\bm y}&= ({\bm I_N}-\lambda {\bm W}){\bm X}{\bm \beta} + {\bm \varepsilon} \\
+({\bm I_N}-\lambda {\bm W}){\bm y}&={\bm X}{\bm \beta} -\lambda{\bm W}{\bm X}{\bm \beta} + {\bm \varepsilon} \\
+{\bm y}&=({\bm I_N}-\lambda {\bm W})^{-1}({\bm X}{\bm \beta} + {\bm W}{\bm X}{\bm \theta} + {\bm \varepsilon}). 
+\end{split}
+$$
+
+Thus, the SEM constitutes a special case of an SDM with the relative simple restriction ${\bm \theta}=-\lambda{\bm \beta}$, meaning direct and indirect effects are constrained to a common factor [@Anselin.1988; @Anselin.2003]. 
+
+The fact that SDM subsumes SAR, SLX, and SEM leads to the conclusion that applied research should only consider SDM and SDEM as model specifications [@LeSage.2014]. Especially in the case of a likely omitted variable bias, [@LeSage.2009, p.~68] argue in favour of using the SDM.
+
+Nonetheless, others propose to use the SLX specification as point of departure [@Gibbons.2012; @HalleckVega.2015]. First, scholars have argued that SAC and SDM models are only weakly identified in practice [@Gibbons.2012; @Pinkse.2010]. Second, the global spillover specification in SAR, SAC, and SDM often seems to be theoretically implausible.
+
+And finally:  
+
+!["I will use spatial lags of X, not spatial lags of Y", J. [Wooldridge on twitter]( https://twitter.com/jmwooldridge/status/1369460526770753537)](fig/wooldridge_tweet.png)
+
+
+### Design and Theory
+
+Some argue that the best way of choosing the appropriate model specification is to exclude one or more sources of spatial dependence -- autocorrelation in the dependent variable, autocorrelation in the disturbances, or spatial spillover effects of the covariates -- by design [@Gibbons.2012, @Gibbons.2015]. 
+
+**Natural experiments** are probably the best way of making one or more sources of spatial dependence unlikely, thereby restricting the model alternatives to a subset of all available models. However, the opportunities to use natural experiments are restricted in social sciences, making it a favourable but often impractical way of model selection.
+
+@Cook.2020 and @Ruttenauer.2022a argue that theoretical considerations should guide the model selection.
+
+1) Rule out some sources of spatial dependence by theory, and thus restrict the specifications to a subset ( _Where does the spatial dependence come from?_ ),
+  
+2) Theoretical mechanisms may guide the choice of either global or local spillover effects.
+

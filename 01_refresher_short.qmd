@@ -721,7 +721,7 @@ gp
 
 4) Please calculate the distance of each MSOA to the London city centre 
   a) use google maps to get lon and lat, 
-  b) us `st_as_sf()` to create the spatial point
+  b) use `st_as_sf()` to create the spatial point
   c) use `st_distance()` to calculate the distance
   
 5) Can you create a plot with the distance to the city centre and pub counts next to each other?  

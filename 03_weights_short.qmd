@@ -630,7 +630,7 @@ mp1 <-  tm_shape(msoa.spdf) +
 mp1
 ```
 
-Note that it is not suggested to interpret those cluster as singificant in the strict statistical sense. @Pebesma.2023 suggest to speak of *interesting clusters*. After all, this is an explorative approach. Nevertheless, it can help to identify spatial patterns and clusters.
+Note that it is not suggested to interpret those cluster as significant in the strict statistical sense. @Pebesma.2023 suggest to speak of *interesting clusters*. After all, this is an explorative approach. Nevertheless, it can help to identify spatial patterns and clusters.
 
 There are more ways of calculating these hotspot maps and more choices on the cutoffs and calculation of the statistical significance. For more materials see [Chapter 15](https://r-spatial.org/book/15-Measures.html) of @Pebesma.2023.
 

@@ -284,7 +284,7 @@ queens.nb <- poly2nb(sub.spdf, queen = TRUE, snap = 1)
 W <- nb2mat(queens.nb, style = "B")
 W
 ```
-We have selected 6 units. So, $\bm W$ is a $6 \times 6$ matrix. we see that observation 1 has one neighbour: observation 3. Observation 2 has two nieghbours: observation 4 and observation 6. The diagonal is zero: no unit is a neighbour of themselves.
+We have selected 6 units. So, $\bm W$ is a $6 \times 6$ matrix. we see that observation 1 has one neighbour: observation 3. Observation 2 has two neighbours: observation 4 and observation 6. The diagonal is zero: no unit is a neighbour of themselves.
 
 No we row-normalize this matrix.
 
@@ -295,7 +295,7 @@ W_rn <- listw2mat(queens.lw)
 W_rn
 ```
 
-No every single weight $w_{ij}$ is divided by the total number of neighbours $n_i$ of the focal unit. For observation 1, observation 3 is the only neighbour, thus a weight = 1. FOr observation two, both neighbours have a weight of 1/2. For obervation 3 (with three neighbours) each neighbour got a weight of 1/3.
+No every single weight $w_{ij}$ is divided by the total number of neighbours $n_i$ of the focal unit. For observation 1, observation 3 is the only neighbour, thus a weight = 1. For observation two, both neighbours have a weight of 1/2. For observation 3 (with three neighbours) each neighbour got a weight of 1/3.
 
 
 ::: callout-tip
@@ -391,9 +391,9 @@ Remember that is the coefficient for the term $\bm y = \rho \bm W \bm y \ldots$.
 In substantive terms, house prices in the focal unit positively influence house prices in neighbouring units, which again influences house prices among the neighbours of these neighbours, and so on (we'll get back to this).
 
 ::: callout-warning
-The coefficients of covariates in a SAR model are not marginal or partical effects, because of the spillovers and feedback loops in $\bm y$ (see below)!
+The coefficients of covariates in a SAR model are not marginal or partial effects, because of the spillovers and feedback loops in $\bm y$ (see below)!
 
-From the coefficient, we can only interpret the direction: there's a positive effect of air pollution and a negative effect of population sensity, and so on...
+From the coefficient, we can only interpret the direction: there's a positive effect of air pollution and a negative effect of population sensitivity, and so on...
 :::
 
 
