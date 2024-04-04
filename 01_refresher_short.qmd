@@ -715,14 +715,156 @@ gp
 
 1) What is the difference between a spatial "sf" object and a conventional "data.frame"? What's the purpose of the function `st_drop_geometry()`?
 
+It's the same. A spatial "sf" object just has an additional column containing the spatial coordinates.
+
 2) Using msoa.spdf, please create a spatial data frame that contains only the MSOA areas that are within the ulez zone.
 
+```{r}
+sub4.spdf <- msoa.spdf[ulez.spdf, ]
+```
+
+
 3) Please create a map for London (or only the msoa-ulez subset) which shows the share of Asian residents (or any other ethnic group).
+
+```{r}
+gp <- ggplot(msoa.spdf)+
+    geom_sf(aes(fill = per_asian))+
+    scale_fill_viridis_c(option = "E")+
+    coord_sf(datum = NA)+
+    theme_map()+
+    theme(legend.position = c(.9, .6))
+gp
+```
+
 
 4) Please calculate the distance of each MSOA to the London city centre 
   a) use google maps to get lon and lat, 
   b) use `st_as_sf()` to create the spatial point
   c) use `st_distance()` to calculate the distance
   
+```{r}
+### Distance to city center
+# Define centre
+centre <- st_as_sf(data.frame(lon = -0.128120855701165, 
+                              lat = 51.50725909644806),
+                   coords = c("lon", "lat"), 
+                   crs = 4326)
+# Reproject
+centre <- st_transform(centre, crs = st_crs(msoa.spdf))
+# Calculate distance
+msoa.spdf$dist_centre <- as.numeric(st_distance(msoa.spdf, centre)) / 1000
+# hist(msoa.spdf$dist_centre)
+```
+  
+  
 5) Can you create a plot with the distance to the city centre and pub counts next to each other?  
+
+
+```{r}
+
+# Define colours
+cols <- viridis(n = 10, direction = 1, option = "B")
+cols2 <- viridis(n = 10, direction = 1, option = "E")
+
+
+mp1 <-  tm_shape(msoa.spdf) + 
+  tm_fill(col = "dist_centre", 
+          style = "fisher", # algorithm to def cut points
+          n = 10, # Number of requested cut points
+          palette = cols, # colours
+          alpha = 1, # transparency 
+          title = "Distance", 
+          legend.hist = FALSE # histogram next to map?
+          ) +
+  tm_borders(col = "white", lwd = 0.5, alpha = 0.5) +
+  tm_layout(frame = FALSE,
+            legend.frame = TRUE, legend.bg.color = TRUE,
+            legend.position = c("right", "bottom"),
+            legend.outside = FALSE,
+            main.title = "Dist centre", 
+            main.title.position = "center",
+            main.title.size = 1.6,
+            legend.title.size = 0.8,
+            legend.text.size = 0.8)
+
+
+mp2 <-  tm_shape(msoa.spdf) + 
+  tm_fill(col = "dist_centre", 
+          style = "quantile", # algorithm to def cut points
+          n = 10, # Number of requested cut points
+          palette = cols, # colours
+          alpha = 1, # transparency 
+          title = "Distance", 
+          legend.hist = FALSE # histogram next to map?
+          ) +
+  tm_borders(col = "white", lwd = 0.5, alpha = 0.5) +
+  tm_layout(frame = FALSE,
+            legend.frame = TRUE, legend.bg.color = TRUE,
+            legend.position = c("right", "bottom"),
+            legend.outside = FALSE,
+            main.title = "Dist centre", 
+            main.title.position = "center",
+            main.title.size = 1.6,
+            legend.title.size = 0.8,
+            legend.text.size = 0.8)
+
+
+mp3 <-  tm_shape(msoa.spdf) + 
+  tm_fill(col = "pubs_count", 
+          style = "fisher", # algorithm to def cut points
+          n = 10, # Number of requested cut points
+          palette = cols, # colours
+          alpha = 1, # transparency 
+          title = "Count", 
+          legend.hist = FALSE # histogram next to map?
+          ) +
+  tm_borders(col = "white", lwd = 0.5, alpha = 0.5) +
+  tm_layout(frame = FALSE,
+            legend.frame = TRUE, legend.bg.color = TRUE,
+            legend.position = c("right", "bottom"),
+            legend.outside = FALSE,
+            main.title = "Pubs", 
+            main.title.position = "center",
+            main.title.size = 1.6,
+            legend.title.size = 0.8,
+            legend.text.size = 0.8)
+
+
+mp4 <-  tm_shape(msoa.spdf) + 
+  tm_fill(col = "pubs_count", 
+          style = "quantile", # algorithm to def cut points
+          n = 10, # Number of requested cut points
+          palette = cols, # colours
+          alpha = 1, # transparency 
+          title = "Count", 
+          legend.hist = FALSE # histogram next to map?
+          ) +
+  tm_borders(col = "white", lwd = 0.5, alpha = 0.5) +
+  tm_layout(frame = FALSE,
+            legend.frame = TRUE, legend.bg.color = TRUE,
+            legend.position = c("right", "bottom"),
+            legend.outside = FALSE,
+            main.title = "Pubs", 
+            main.title.position = "center",
+            main.title.size = 1.6,
+            legend.title.size = 0.8,
+            legend.text.size = 0.8)
+
+
+tmap_arrange(mp1, mp2, mp3, mp4, ncol = 2, nrow = 2)
+```
+
+
+### Geogrphic cter
+
+```{r}
+# Make one single schape
+london <- st_union(msoa.spdf)
+
+# Calculate center
+cent <- st_centroid(london)
+
+mapview(cent)
+```
+
 
