@@ -71,17 +71,65 @@ moran.test(msoa.spdf$no2, listw = dist_15.lw)
 
 a) Estimate a spatial autoregressive SAR model
 
+```{r}
+mod_1.sar <- lagsarlm(log(no2) ~ per_mixed + per_asian + per_black + per_other
+                      + per_nonUK_EU + per_nonEU  + log(POPDEN),  
+                      data = msoa.spdf, 
+                      listw = dist_15.lw,
+                      Durbin = FALSE) # we could here extend to SDM
+summary(mod_1.sar)
+```
+
 
 b) Have a look into the true multiplier matrix $({\bm I_N}-\rho {\bm W})^{-1}\beta_k$
 
+```{r}
+W <- listw2mat(dist_15.lw)
+I <- diag(dim(W)[1])
+
+rho <- unname(mod_1.sar$rho)
+
+M <- solve(I - rho*W)
+
+M[1:10, 1:10]
+```
 
 c) Create an $N \times N$ effects matrix. What is the effect of unit 6 on unit 10?
 
+```{r}
+# For beta 1
+
+beta <- mod_1.sar$coefficients
+
+effM <- beta[2] * M
+
+effM[1:10, 1:10]
+
+# "Effect" of unit 6 on unit 10
+effM[10, 6]
+```
 
 d) Estimate a spatial autoregressive SLX model
 
 
+```{r}
+mod_1.slx <- lmSLX(log(no2) ~ per_mixed + per_asian + per_black + per_other
+                      + per_nonUK_EU + per_nonEU  + log(POPDEN),  
+                      data = msoa.spdf, 
+                      listw = dist_15.lw,
+                  Durbin = TRUE)
+```
+
+
+
 e) Calculate and interpret the summary impact measures for SAR and SLX.
+
+```{r}
+mod_1.sar.imp <- impacts(mod_1.sar, listw = dist_15.lw, R = 300)
+summary(mod_1.sar.imp)
+```
+
+For SLX, you can just interpret the coefficients. Impacts will give you the same results.
 
 
 
@@ -140,9 +188,39 @@ kreise.spdf <- st_read(dsn = "_data/vg5000_ebenen_1231",
 
 ### 1) Merge data with the shape file (as with conventional data)
 
+```{r}
+# Merge
+inkar_2020.spdf <- merge(kreise.spdf, inkar.df[inkar.df$year == 2020, ], 
+                         by.x = "AGS", by.y = "Kennziffer")
+```
+
 
 
 ### 2) Create a map of life-expectancy
+
+```{r}
+cols <- viridis(n = 100, direction = -1, option = "G")
+
+mp1 <-  tm_shape(inkar_2020.spdf) + 
+  tm_fill(col = "life_expectancy", 
+          style = "cont", # algorithm to def cut points
+          palette = cols, # colours
+          stretch.palette = TRUE,
+          title = "in years"
+          ) +
+  tm_borders(col = "white", lwd = 0.5, alpha = 0.5) +
+  tm_layout(frame = FALSE,
+            legend.frame = TRUE, legend.bg.color = TRUE,
+            legend.position = c("right", "bottom"),
+            legend.outside = FALSE,
+            main.title = "Life expectancy", 
+            main.title.position = "center",
+            main.title.size = 1.6,
+            legend.title.size = 0.8,
+            legend.text.size = 0.8)
+
+mp1
+```
 
 
 
@@ -151,21 +229,112 @@ kreise.spdf <- st_read(dsn = "_data/vg5000_ebenen_1231",
 
 ### 4) Generate a neighbours object (e.g. the 10 nearest neighbours).
 
+```{r}
+# nb <- poly2nb(kreise.spdf, row.names = "ags", queen = TRUE)
+knn <- knearneigh(st_centroid(kreise.spdf), k = 10)
+nb <- knn2nb(knn, row.names = kreise.spdf$ags)
+listw <- nb2listw(nb, style = "W")
+```
+
+
 
 
 ### 5) Estimate a cross-sectional spatial model for the year 2020 and calculate the impacts.
 
 
+```{r}
+
+### Use a spatial Durbin Error model
+
+# Spec formula
+fm <- life_expectancy ~ median_income + unemployment_rate + share_college + car_density
+
+# Estimate error model with Durbin = TRUE 
+mod_1.durb <- errorsarlm(fm,  
+                      data = inkar_2020.spdf, 
+                      listw = listw,
+                      Durbin = TRUE)
+
+summary(mod_1.durb)
+
+# Calculate impacts (which is unnecessary in this case)
+mod_1.durb.imp <- impacts(mod_1.durb, listw = listw, R = 300)
+summary(mod_1.durb.imp, zstats = TRUE, short = TRUE)
+
+```
+
 
 
 ### 6) Calculate the spatial lagged variables for your covariates (e.g. use create_WX(), which needs a non-spatial df as input) .
 
+```{r}
+# Extract covariate names
+covars <- attr(terms(fm),"term.labels")
+
+w_vars <- create_WX(st_drop_geometry(inkar_2020.spdf)[, covars],
+                    listw = listw,
+                    prefix = "w")
+
+inkar_2020.spdf <- cbind(inkar_2020.spdf, w_vars)
+```
 
 
 
 ### 6) Can you run a spatial machine learning model? (for instance, using `randomForest`)?
 
+```{r}
+library(randomForest)
+
+# Train
+rf.mod <- randomForest(life_expectancy ~ median_income + unemployment_rate + share_college + car_density +
+                         w.median_income + w.unemployment_rate + w.share_college + w.car_density,
+                       data = st_drop_geometry(inkar_2020.spdf), 
+                       ntree = 1000,
+                       importance = TRUE)
+
+# Inspect the mechanics of the model
+importance(rf.mod)
+varImpPlot(rf.mod)
+```
+
 
 You could even go further and use higher order neighbours (e.g. `nblag(queens.nb, maxlag = 3)`) to check the importance of direct neighbours and the neighbours neighbours and so on ...
 
 
+
+
+```{r}
+
+# Create higher order NB object
+listw.lag <- nblag(nb, maxlag = 3)
+
+
+# Create listwise of 1st, 2nd and 3rd order neighbours
+listw.lw1 <- nb2listw(listw.lag[[1]], style = "W")
+listw.lw2 <- nb2listw(listw.lag[[2]], style = "W")
+listw.lw3 <- nb2listw(listw.lag[[3]], style = "W")
+
+# Create lagged X
+w_vars2 <- create_WX(st_drop_geometry(inkar_2020.spdf)[, covars],
+                    listw = listw.lw2,
+                    prefix = "w2")
+
+w_vars3 <- create_WX(st_drop_geometry(inkar_2020.spdf)[, covars],
+                    listw = listw.lw3,
+                    prefix = "w3")
+
+inkar_2020.spdf <- cbind(inkar_2020.spdf, w_vars2, w_vars3)
+
+# Train
+rf.mod <- randomForest(life_expectancy ~ median_income + unemployment_rate + share_college + car_density +
+                         w.median_income + w.unemployment_rate + w.share_college + w.car_density +
+                         w2.median_income + w2.unemployment_rate + w2.share_college + w2.car_density +
+                         w3.median_income + w3.unemployment_rate + w3.share_college + w3.car_density,
+                       data = st_drop_geometry(inkar_2020.spdf), 
+                       ntree = 1000,
+                       importance = TRUE)
+
+# Inspect the mechanics of the model
+importance(rf.mod)
+varImpPlot(rf.mod)
+```

@@ -727,30 +727,30 @@ Simulation results ( variance matrix):
 ========================================================
 Simulated standard errors
                   Direct     Indirect       Total
-log(no2)    0.0455403864 0.0970320204 0.127445143
-log(POPDEN) 0.0144543959 0.0284990365 0.041978463
-per_mixed   0.0066802197 0.0123003286 0.018718149
-per_asian   0.0005343593 0.0008871534 0.001373954
-per_black   0.0010144189 0.0025094758 0.002921994
-per_other   0.0032434108 0.0057469446 0.008970145
+log(no2)    0.0494593420 0.0973272218 0.134285983
+log(POPDEN) 0.0145222424 0.0263665289 0.039966481
+per_mixed   0.0063863118 0.0110294522 0.017173580
+per_asian   0.0004906914 0.0008262718 0.001272872
+per_black   0.0010097045 0.0022083476 0.002629527
+per_other   0.0032344198 0.0055953045 0.008811296
 
 Simulated z-values:
-                 Direct   Indirect       Total
-log(no2)      9.7890429  7.8612051   9.4831814
-log(POPDEN)  -4.3916201 -3.8297027  -4.1121337
-per_mixed     3.1663006  2.9547201   3.0716505
-per_asian    -4.7528549 -4.8756224  -4.9966438
-per_black   -14.0333396 -9.7086482 -13.2099175
-per_other    -0.5721651 -0.5680754  -0.5708341
+                 Direct    Indirect       Total
+log(no2)      9.1229237   7.8108105   9.0211819
+log(POPDEN)  -4.3802836  -4.0708540  -4.2772299
+per_mixed     3.2351350   3.1535587   3.2283663
+per_asian    -5.2311382  -5.2212168  -5.4059005
+per_black   -14.1158227 -10.8683737 -14.5478484
+per_other    -0.6413893  -0.6408135  -0.6423651
 
 Simulated p-values:
             Direct     Indirect   Total     
-log(no2)    &lt; 2.22e-16 3.7748e-15 &lt; 2.22e-16
-log(POPDEN) 1.1251e-05 0.0001283  3.9202e-05
-per_mixed   0.0015439  0.0031295  0.0021288 
-per_asian   2.0056e-06 1.0847e-06 5.8337e-07
+log(no2)    &lt; 2.22e-16 5.7732e-15 &lt; 2.22e-16
+log(POPDEN) 1.1852e-05 4.6841e-05 1.8923e-05
+per_mixed   0.0012159  0.0016129  0.001245  
+per_asian   1.6847e-07 1.7775e-07 6.4484e-08
 per_black   &lt; 2.22e-16 &lt; 2.22e-16 &lt; 2.22e-16
-per_other   0.5672101  0.5699838  0.5681121 </code></pre>
+per_other   0.5212698  0.5216439  0.520636  </code></pre>
 </div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Alternative with traces (better for large W)</span></span>
 <span><span class="va">W</span> <span class="op">&lt;-</span> <span class="fu">as</span><span class="op">(</span><span class="va">queens.lw</span>, <span class="st">"CsparseMatrix"</span><span class="op">)</span></span>
@@ -775,30 +775,30 @@ Simulation results ( variance matrix):
 ========================================================
 Simulated standard errors
                   Direct     Indirect       Total
-log(no2)    0.0488438933 0.0969231156 0.132313062
-log(POPDEN) 0.0133055052 0.0262372062 0.038602465
-per_mixed   0.0066195742 0.0120956945 0.018462859
-per_asian   0.0004792722 0.0007930686 0.001222712
-per_black   0.0010736506 0.0023977804 0.002874362
-per_other   0.0033778801 0.0058555058 0.009215706
+log(no2)    0.0455134923 0.0915535169 0.122048099
+log(POPDEN) 0.0137264116 0.0265400573 0.039329786
+per_mixed   0.0062190250 0.0112847261 0.017255922
+per_asian   0.0005025515 0.0008517418 0.001302576
+per_black   0.0010777034 0.0023328589 0.002782662
+per_other   0.0034795538 0.0060299096 0.009489688
 
 Simulated z-values:
                  Direct    Indirect       Total
-log(no2)      9.1153512   7.7176209   9.0183469
-log(POPDEN)  -4.6515772  -3.9862441  -4.3126649
-per_mixed     3.1336482   2.8994654   3.0230673
-per_asian    -5.2932612  -5.3597660  -5.5512454
-per_black   -13.3100257 -10.0114960 -13.3231973
-per_other    -0.5811422  -0.5771553  -0.5797239
+log(no2)      9.8944180   8.3308142   9.9390721
+log(POPDEN)  -4.5300629  -3.9851698  -4.2702532
+per_mixed     3.3576793   3.1426681   3.2652930
+per_asian    -5.1698954  -5.1516806  -5.3632480
+per_black   -13.2894855 -10.3929223 -13.8598728
+per_other    -0.6363339  -0.6288323  -0.6328933
 
 Simulated p-values:
             Direct     Indirect   Total     
-log(no2)    &lt; 2.22e-16 1.1768e-14 &lt; 2.22e-16
-log(POPDEN) 3.2941e-06 6.7127e-05 1.6130e-05
-per_mixed   0.0017265  0.003738   0.0025023 
-per_asian   1.2015e-07 8.3330e-08 2.8364e-08
+log(no2)    &lt; 2.22e-16 &lt; 2.22e-16 &lt; 2.22e-16
+log(POPDEN) 5.8966e-06 6.7432e-05 1.9525e-05
+per_mixed   0.000786   0.0016742  0.0010935 
+per_asian   2.3423e-07 2.5816e-07 8.1739e-08
 per_black   &lt; 2.22e-16 &lt; 2.22e-16 &lt; 2.22e-16
-per_other   0.5611446  0.563835   0.5621008 </code></pre>
+per_other   0.524559   0.5294588  0.5268033 </code></pre>
 </div>
 </div>
 <p>The indirect effects in SAR, SAC, and SDM refer to global spillover effects. This means a change of <span class="math inline">\(x\)</span> in the focal units flows through the entire system of neighbours (direct nieightbours, neighbours of neighbours, …) influencing ‘their <span class="math inline">\(y\)</span>’. One can think of this as diffusion or a change in a long-term equilibrium.</p>
