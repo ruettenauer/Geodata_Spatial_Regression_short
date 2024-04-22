@@ -23,6 +23,8 @@ book:
     # - 11_other.qmd
     # - 12_exercise2.qmd
     - references.qmd
+    
+  downloads: [pdf]  
 
 bibliography: references.bib
 
@@ -43,4 +45,8 @@ format:
         out.width: 100%
         R.options:
           width: 68
-    
+  pdf: default
+
+pdf-engine: lualatex
+
+

@@ -112,6 +112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <a href="./">Spatial Data Analysis</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/ruettenauer/Geodata_Spatial_Regression_short/" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./Spatial-Data-Analysis.pdf" rel="" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
@@ -221,7 +222,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
-</header><section id="required-packages" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="required-packages">Required packages</h3>
+</header><p><span class="math display">\[
+\newcommand{\Exp}{\mathrm{E}}
+\newcommand\given[1][]{\:#1\vert\:}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\rank}{\mathrm{rank}}
+\newcommand{\bm}[1]{\boldsymbol{\mathbf{#1}}}
+\]</span></p>
+<section id="required-packages" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="required-packages">Required packages</h3>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">pkgs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sf"</span>, <span class="st">"mapview"</span>, <span class="st">"spdep"</span>, <span class="st">"spatialreg"</span>, <span class="st">"tmap"</span>, <span class="st">"viridisLite"</span><span class="op">)</span> <span class="co"># note: load spdep first, then spatialreg</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">pkgs</span>, <span class="va">require</span>, character.only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -418,7 +427,7 @@ test value: 108.97, p-value: &lt; 2.22e-16</code></pre>
 </div>
 </div>
 <ol start="2" type="a">
-<li>Have a look into the true multiplier matrix <span class="math inline">\(({\boldsymbol{\mathbf{I}}_N}-\rho {\boldsymbol{\mathbf{W}}})^{-1}\beta_k\)</span>
+<li>Have a look into the true multiplier matrix <span class="math inline">\(({\bm I_N}-\rho {\bm W})^{-1}\beta_k\)</span>
 </li>
 </ol>
 <div class="cell">
@@ -547,24 +556,24 @@ Sample size per chain = 300
    plus standard error of the mean:
 
                    Mean        SD  Naive SE Time-series SE
-per_mixed     0.0006469 0.0021077 1.217e-04      8.409e-05
-per_asian    -0.0001152 0.0001682 9.710e-06      9.710e-06
-per_black    -0.0006205 0.0003359 1.939e-05      1.939e-05
-per_other     0.0028406 0.0010445 6.030e-05      6.030e-05
-per_nonUK_EU  0.0012662 0.0005656 3.266e-05      3.266e-05
-per_nonEU     0.0026731 0.0004966 2.867e-05      2.867e-05
-log(POPDEN)   0.0264184 0.0035512 2.050e-04      2.050e-04
+per_mixed     6.800e-04 0.0022710 1.311e-04      1.311e-04
+per_asian    -9.259e-05 0.0001711 9.877e-06      9.877e-06
+per_black    -6.341e-04 0.0003511 2.027e-05      2.027e-05
+per_other     2.852e-03 0.0010000 5.773e-05      5.773e-05
+per_nonUK_EU  1.279e-03 0.0005384 3.109e-05      2.880e-05
+per_nonEU     2.614e-03 0.0005052 2.917e-05      2.917e-05
+log(POPDEN)   2.722e-02 0.0038099 2.200e-04      2.200e-04
 
 2. Quantiles for each variable:
 
                    2.5%        25%        50%        75%     97.5%
-per_mixed    -0.0036053 -0.0008856  0.0007080  2.047e-03 4.771e-03
-per_asian    -0.0004428 -0.0002275 -0.0001221 -1.006e-05 2.398e-04
-per_black    -0.0012785 -0.0008568 -0.0006149 -3.743e-04 1.564e-05
-per_other     0.0008415  0.0021073  0.0027885  3.568e-03 4.719e-03
-per_nonUK_EU  0.0001058  0.0009048  0.0012238  1.667e-03 2.296e-03
-per_nonEU     0.0016902  0.0023591  0.0026884  2.947e-03 3.728e-03
-log(POPDEN)   0.0188973  0.0241061  0.0264102  2.897e-02 3.289e-02
+per_mixed    -0.0035235 -0.0009485  0.0007113  2.216e-03 4.967e-03
+per_asian    -0.0004007 -0.0002095 -0.0001075  1.787e-05 2.656e-04
+per_black    -0.0013209 -0.0008559 -0.0006368 -3.807e-04 3.361e-05
+per_other     0.0008672  0.0022864  0.0027634  3.480e-03 4.953e-03
+per_nonUK_EU  0.0001046  0.0009682  0.0012634  1.614e-03 2.266e-03
+per_nonEU     0.0016845  0.0022839  0.0026333  2.953e-03 3.584e-03
+log(POPDEN)   0.0199059  0.0246439  0.0273128  2.987e-02 3.382e-02
 
 ========================================================
 Indirect:
@@ -577,25 +586,25 @@ Sample size per chain = 300
 1. Empirical mean and standard deviation for each variable,
    plus standard error of the mean:
 
-                  Mean       SD  Naive SE Time-series SE
-per_mixed     0.013125 0.046764 0.0026999      0.0019306
-per_asian    -0.002632 0.003798 0.0002193      0.0002193
-per_black    -0.013626 0.007950 0.0004590      0.0004590
-per_other     0.061885 0.025951 0.0014983      0.0014983
-per_nonUK_EU  0.027279 0.012525 0.0007232      0.0007232
-per_nonEU     0.058899 0.017190 0.0009925      0.0009925
-log(POPDEN)   0.577079 0.129835 0.0074960      0.0090043
+                 Mean       SD  Naive SE Time-series SE
+per_mixed     0.01519 0.050693 0.0029268      0.0029663
+per_asian    -0.00205 0.003936 0.0002273      0.0002273
+per_black    -0.01384 0.008537 0.0004929      0.0004929
+per_other     0.06197 0.025536 0.0014743      0.0014743
+per_nonUK_EU  0.02734 0.012152 0.0007016      0.0007505
+per_nonEU     0.05714 0.017564 0.0010141      0.0010141
+log(POPDEN)   0.58815 0.125128 0.0072243      0.0072243
 
 2. Quantiles for each variable:
 
-                  2.5%       25%       50%        75%     97.5%
-per_mixed    -0.080918 -0.019374  0.016232  0.0415570 0.1088248
-per_asian    -0.010740 -0.005082 -0.002421 -0.0002673 0.0049321
-per_black    -0.030674 -0.018928 -0.012779 -0.0082885 0.0003439
-per_other     0.018419  0.045285  0.058480  0.0769677 0.1142825
-per_nonUK_EU  0.002114  0.018720  0.027301  0.0353163 0.0509552
-per_nonEU     0.032236  0.046958  0.056098  0.0688028 0.0984726
-log(POPDEN)   0.381992  0.490135  0.551765  0.6415286 0.8528340
+                  2.5%       25%      50%        75%     97.5%
+per_mixed    -0.081103 -0.018639  0.01516  0.0495997 0.1191921
+per_asian    -0.009157 -0.004675 -0.00216  0.0004143 0.0055830
+per_black    -0.033449 -0.018830 -0.01329 -0.0081513 0.0007166
+per_other     0.018597  0.046179  0.05897  0.0733611 0.1187995
+per_nonUK_EU  0.002502  0.020113  0.02698  0.0338821 0.0519077
+per_nonEU     0.030008  0.046355  0.05515  0.0642058 0.1000690
+log(POPDEN)   0.399116  0.496140  0.56955  0.6576800 0.8764408
 
 ========================================================
 Total:
@@ -609,24 +618,24 @@ Sample size per chain = 300
    plus standard error of the mean:
 
                   Mean       SD  Naive SE Time-series SE
-per_mixed     0.013772 0.048843 0.0028200      0.0020126
-per_asian    -0.002748 0.003963 0.0002288      0.0002288
-per_black    -0.014247 0.008266 0.0004772      0.0004772
-per_other     0.064726 0.026870 0.0015514      0.0015514
-per_nonUK_EU  0.028545 0.013038 0.0007528      0.0007528
-per_nonEU     0.061572 0.017570 0.0010144      0.0010144
-log(POPDEN)   0.603497 0.131736 0.0076058      0.0091256
+per_mixed     0.015868 0.052918 0.0030552      0.0030930
+per_asian    -0.002142 0.004103 0.0002369      0.0002369
+per_black    -0.014475 0.008862 0.0005117      0.0005117
+per_other     0.064819 0.026405 0.0015245      0.0015245
+per_nonUK_EU  0.028616 0.012626 0.0007290      0.0007177
+per_nonEU     0.059757 0.017933 0.0010353      0.0010353
+log(POPDEN)   0.615371 0.126880 0.0073254      0.0073254
 
 2. Quantiles for each variable:
 
                   2.5%       25%       50%        75%     97.5%
-per_mixed    -0.084405 -0.020269  0.017044  0.0436124 0.1134404
-per_asian    -0.011153 -0.005352 -0.002532 -0.0002779 0.0051893
-per_black    -0.031646 -0.019770 -0.013375 -0.0086942 0.0003595
-per_other     0.019141  0.047430  0.061853  0.0802365 0.1185402
-per_nonUK_EU  0.002227  0.019705  0.028635  0.0370982 0.0530021
-per_nonEU     0.034136  0.049451  0.058617  0.0716981 0.1023017
-log(POPDEN)   0.405990  0.517481  0.578098  0.6691289 0.8815422</code></pre>
+per_mixed    -0.083807 -0.019472  0.015896  0.0519753 0.1229114
+per_asian    -0.009527 -0.004868 -0.002275  0.0004299 0.0058638
+per_black    -0.034544 -0.019628 -0.013942 -0.0085527 0.0007494
+per_other     0.019464  0.048386  0.061849  0.0763229 0.1227072
+per_nonUK_EU  0.002608  0.021152  0.028136  0.0355232 0.0543880
+per_nonEU     0.031796  0.048853  0.057742  0.0672532 0.1032455
+log(POPDEN)   0.417314  0.521477  0.598300  0.6860475 0.9008017</code></pre>
 </div>
 </div>
 <p>For SLX, you can just interpret the coefficients. Impacts will give you the same results.</p>
@@ -897,14 +906,14 @@ car_density       1.214e-10  0.0029151 8.6746e-06</code></pre>
 <span><span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/importance.html">importance</a></span><span class="op">(</span><span class="va">rf.mod</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                     %IncMSE IncNodePurity
-median_income       34.72995      40.71530
-unemployment_rate   66.87298     119.49671
-share_college       20.47583      26.17089
-car_density         24.52650      32.98876
-w.median_income     37.66627      57.19081
-w.unemployment_rate 27.31347      49.75936
-w.share_college     17.80799      23.92369
-w.car_density       23.82894      31.20966</code></pre>
+median_income       34.03645      40.91834
+unemployment_rate   64.97511     115.50583
+share_college       22.00718      25.91124
+car_density         25.20195      33.90758
+w.median_income     36.21939      57.65676
+w.unemployment_rate 25.04768      53.52908
+w.share_college     16.97143      24.10762
+w.car_density       24.27691      31.52306</code></pre>
 </div>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/varImpPlot.html">varImpPlot</a></span><span class="op">(</span><span class="va">rf.mod</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -945,23 +954,23 @@ w.car_density       23.82894      31.20966</code></pre>
 <span><span class="co"># Inspect the mechanics of the model</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/importance.html">importance</a></span><span class="op">(</span><span class="va">rf.mod</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                      %IncMSE IncNodePurity
-median_income        28.00171     22.435099
-unemployment_rate    60.24568    109.955639
-share_college        20.94359     16.721447
-car_density          18.55718     15.869500
-w.median_income      28.72148     37.041478
-w.unemployment_rate  18.08557     24.171683
-w.share_college      12.93571      9.754094
-w.car_density        18.07556     13.250320
-w2.median_income     21.34701     20.927199
-w2.unemployment_rate 14.36368     24.408545
-w2.share_college     14.05667     11.943881
-w2.car_density       11.92337     11.870632
-w3.median_income     17.65562     15.889220
-w3.unemployment_rate 17.88343     29.404208
-w3.share_college     10.13834     10.433494
-w3.car_density        9.66774     13.481960</code></pre>
+<pre><code>                       %IncMSE IncNodePurity
+median_income        29.683451     22.771267
+unemployment_rate    61.152787    112.686387
+share_college        20.939773     16.455557
+car_density          18.722195     16.203169
+w.median_income      29.032704     37.273706
+w.unemployment_rate  19.411745     24.360074
+w.share_college      12.276134      9.474994
+w.car_density        17.882999     12.423058
+w2.median_income     22.231137     21.572744
+w2.unemployment_rate 14.455514     23.923654
+w2.share_college     13.873830     12.738961
+w2.car_density       12.539108     13.292469
+w3.median_income     15.992052     15.743698
+w3.unemployment_rate 18.499035     25.645470
+w3.share_college      8.720745     10.104429
+w3.car_density        8.589453     12.864967</code></pre>
 </div>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/varImpPlot.html">varImpPlot</a></span><span class="op">(</span><span class="va">rf.mod</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -1266,344 +1275,349 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb48" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>\newcommand{\Exp}{\mathrm{E}}</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>\newcommand\given<span class="co">[</span><span class="ot">1</span><span class="co">][]</span>{\:#1\vert\:}</span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>\newcommand{\Cov}{\mathrm{Cov}}</span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>\newcommand{\Var}{\mathrm{Var}}</span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>\newcommand{\rank}{\mathrm{rank}}</span>
-<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>\newcommand{\bm}<span class="co">[</span><span class="ot">1</span><span class="co">]</span>{\boldsymbol{\mathbf{#1}}}</span>
-<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a><span class="fu"># Exercise II</span></span>
-<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a><span class="fu">### Required packages {.unnumbered}</span></span>
+<div class="sourceCode" id="cb48" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>::: {.content-hidden unless-format="html"}</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>\newcommand{\Exp}{\mathrm{E}}</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>\newcommand\given<span class="co">[</span><span class="ot">1</span><span class="co">][]</span>{\:#1\vert\:}</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>\newcommand{\Cov}{\mathrm{Cov}}</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>\newcommand{\Var}{\mathrm{Var}}</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>\newcommand{\rank}{\mathrm{rank}}</span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>\newcommand{\bm}<span class="co">[</span><span class="ot">1</span><span class="co">]</span>{\boldsymbol{\mathbf{#1}}}</span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message = FALSE, warning = FALSE, results = 'hide'}</span></span>
-<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a>pkgs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"sf"</span>, <span class="st">"mapview"</span>, <span class="st">"spdep"</span>, <span class="st">"spatialreg"</span>, <span class="st">"tmap"</span>, <span class="st">"viridisLite"</span>) <span class="co"># note: load spdep first, then spatialreg</span></span>
-<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(pkgs, require, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-18"><a href="#cb48-18" aria-hidden="true" tabindex="-1"></a><span class="fu">### Session info {.unnumbered}</span></span>
-<span id="cb48-19"><a href="#cb48-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-22"><a href="#cb48-22" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb48-23"><a href="#cb48-23" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a><span class="fu"># Exercise II</span></span>
+<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a><span class="fu">### Required packages {.unnumbered}</span></span>
+<span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message = FALSE, warning = FALSE, results = 'hide'}</span></span>
+<span id="cb48-18"><a href="#cb48-18" aria-hidden="true" tabindex="-1"></a>pkgs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"sf"</span>, <span class="st">"mapview"</span>, <span class="st">"spdep"</span>, <span class="st">"spatialreg"</span>, <span class="st">"tmap"</span>, <span class="st">"viridisLite"</span>) <span class="co"># note: load spdep first, then spatialreg</span></span>
+<span id="cb48-19"><a href="#cb48-19" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(pkgs, require, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb48-20"><a href="#cb48-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-21"><a href="#cb48-21" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-22"><a href="#cb48-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-23"><a href="#cb48-23" aria-hidden="true" tabindex="-1"></a><span class="fu">### Session info {.unnumbered}</span></span>
 <span id="cb48-24"><a href="#cb48-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-25"><a href="#cb48-25" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb48-26"><a href="#cb48-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-27"><a href="#cb48-27" aria-hidden="true" tabindex="-1"></a><span class="fu">### Reload data from pervious session {.unnumbered}</span></span>
-<span id="cb48-28"><a href="#cb48-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-31"><a href="#cb48-31" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb48-32"><a href="#cb48-32" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"_data/msoa2_spatial.RData"</span>)</span>
-<span id="cb48-33"><a href="#cb48-33" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb48-34"><a href="#cb48-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-35"><a href="#cb48-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-36"><a href="#cb48-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## Environmental inequality</span></span>
-<span id="cb48-37"><a href="#cb48-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-38"><a href="#cb48-38" aria-hidden="true" tabindex="-1"></a>How would you investigate the following descriptive research question: Are ethnic (and immigrant) minorities in London exposed to higher levels of pollution? Also consider the spatial structure. What's your dependent and whats your independent variable?</span>
+<span id="cb48-27"><a href="#cb48-27" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-28"><a href="#cb48-28" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
+<span id="cb48-29"><a href="#cb48-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-30"><a href="#cb48-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-31"><a href="#cb48-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-32"><a href="#cb48-32" aria-hidden="true" tabindex="-1"></a><span class="fu">### Reload data from pervious session {.unnumbered}</span></span>
+<span id="cb48-33"><a href="#cb48-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-36"><a href="#cb48-36" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-37"><a href="#cb48-37" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"_data/msoa2_spatial.RData"</span>)</span>
+<span id="cb48-38"><a href="#cb48-38" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb48-39"><a href="#cb48-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-40"><a href="#cb48-40" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1) Define a neigbours weights object of your choice {.unnumbered}</span></span>
-<span id="cb48-41"><a href="#cb48-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-42"><a href="#cb48-42" aria-hidden="true" tabindex="-1"></a>Assume a typical neighbourhood would be 2.5km in diameter</span>
-<span id="cb48-43"><a href="#cb48-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-46"><a href="#cb48-46" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb48-47"><a href="#cb48-47" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">st_centroid</span>(msoa.spdf)</span>
+<span id="cb48-40"><a href="#cb48-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-41"><a href="#cb48-41" aria-hidden="true" tabindex="-1"></a><span class="fu">## Environmental inequality</span></span>
+<span id="cb48-42"><a href="#cb48-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-43"><a href="#cb48-43" aria-hidden="true" tabindex="-1"></a>How would you investigate the following descriptive research question: Are ethnic (and immigrant) minorities in London exposed to higher levels of pollution? Also consider the spatial structure. What's your dependent and whats your independent variable?</span>
+<span id="cb48-44"><a href="#cb48-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-45"><a href="#cb48-45" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1) Define a neigbours weights object of your choice {.unnumbered}</span></span>
+<span id="cb48-46"><a href="#cb48-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-47"><a href="#cb48-47" aria-hidden="true" tabindex="-1"></a>Assume a typical neighbourhood would be 2.5km in diameter</span>
 <span id="cb48-48"><a href="#cb48-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-49"><a href="#cb48-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Neighbours within 3km distance</span></span>
-<span id="cb48-50"><a href="#cb48-50" aria-hidden="true" tabindex="-1"></a>dist_15.nb <span class="ot">&lt;-</span> <span class="fu">dnearneigh</span>(coords, <span class="at">d1 =</span> <span class="dv">0</span>, <span class="at">d2 =</span> <span class="dv">2500</span>)</span>
-<span id="cb48-51"><a href="#cb48-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-52"><a href="#cb48-52" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dist_15.nb)</span>
+<span id="cb48-51"><a href="#cb48-51" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-52"><a href="#cb48-52" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">st_centroid</span>(msoa.spdf)</span>
 <span id="cb48-53"><a href="#cb48-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-54"><a href="#cb48-54" aria-hidden="true" tabindex="-1"></a><span class="co"># There are some mpty one. Lets impute with the nearest neighbour</span></span>
-<span id="cb48-55"><a href="#cb48-55" aria-hidden="true" tabindex="-1"></a>k2.nb <span class="ot">&lt;-</span> <span class="fu">knearneigh</span>(coords, <span class="at">k =</span> <span class="dv">1</span>)</span>
+<span id="cb48-54"><a href="#cb48-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Neighbours within 3km distance</span></span>
+<span id="cb48-55"><a href="#cb48-55" aria-hidden="true" tabindex="-1"></a>dist_15.nb <span class="ot">&lt;-</span> <span class="fu">dnearneigh</span>(coords, <span class="at">d1 =</span> <span class="dv">0</span>, <span class="at">d2 =</span> <span class="dv">2500</span>)</span>
 <span id="cb48-56"><a href="#cb48-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-57"><a href="#cb48-57" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace zero</span></span>
-<span id="cb48-58"><a href="#cb48-58" aria-hidden="true" tabindex="-1"></a>nolink_ids <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">card</span>(dist_15.nb) <span class="sc">==</span> <span class="dv">0</span>)</span>
-<span id="cb48-59"><a href="#cb48-59" aria-hidden="true" tabindex="-1"></a>dist_15.nb[<span class="fu">card</span>(dist_15.nb) <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> k2.nb<span class="sc">$</span>nn[nolink_ids, ]</span>
-<span id="cb48-60"><a href="#cb48-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-61"><a href="#cb48-61" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dist_15.nb)</span>
-<span id="cb48-62"><a href="#cb48-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-63"><a href="#cb48-63" aria-hidden="true" tabindex="-1"></a><span class="co"># listw object with row-normalization</span></span>
-<span id="cb48-64"><a href="#cb48-64" aria-hidden="true" tabindex="-1"></a>dist_15.lw <span class="ot">&lt;-</span> <span class="fu">nb2listw</span>(dist_15.nb, <span class="at">style =</span> <span class="st">"W"</span>)</span>
+<span id="cb48-57"><a href="#cb48-57" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dist_15.nb)</span>
+<span id="cb48-58"><a href="#cb48-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-59"><a href="#cb48-59" aria-hidden="true" tabindex="-1"></a><span class="co"># There are some mpty one. Lets impute with the nearest neighbour</span></span>
+<span id="cb48-60"><a href="#cb48-60" aria-hidden="true" tabindex="-1"></a>k2.nb <span class="ot">&lt;-</span> <span class="fu">knearneigh</span>(coords, <span class="at">k =</span> <span class="dv">1</span>)</span>
+<span id="cb48-61"><a href="#cb48-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-62"><a href="#cb48-62" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace zero</span></span>
+<span id="cb48-63"><a href="#cb48-63" aria-hidden="true" tabindex="-1"></a>nolink_ids <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">card</span>(dist_15.nb) <span class="sc">==</span> <span class="dv">0</span>)</span>
+<span id="cb48-64"><a href="#cb48-64" aria-hidden="true" tabindex="-1"></a>dist_15.nb[<span class="fu">card</span>(dist_15.nb) <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> k2.nb<span class="sc">$</span>nn[nolink_ids, ]</span>
 <span id="cb48-65"><a href="#cb48-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-66"><a href="#cb48-66" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-66"><a href="#cb48-66" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dist_15.nb)</span>
 <span id="cb48-67"><a href="#cb48-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-68"><a href="#cb48-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-69"><a href="#cb48-69" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2) Estimate the extent of spatial auto-correlation {.unnumbered}</span></span>
+<span id="cb48-68"><a href="#cb48-68" aria-hidden="true" tabindex="-1"></a><span class="co"># listw object with row-normalization</span></span>
+<span id="cb48-69"><a href="#cb48-69" aria-hidden="true" tabindex="-1"></a>dist_15.lw <span class="ot">&lt;-</span> <span class="fu">nb2listw</span>(dist_15.nb, <span class="at">style =</span> <span class="st">"W"</span>)</span>
 <span id="cb48-70"><a href="#cb48-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-73"><a href="#cb48-73" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb48-74"><a href="#cb48-74" aria-hidden="true" tabindex="-1"></a><span class="fu">moran.test</span>(msoa.spdf<span class="sc">$</span>no2, <span class="at">listw =</span> dist_15.lw)</span>
-<span id="cb48-75"><a href="#cb48-75" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb48-76"><a href="#cb48-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-77"><a href="#cb48-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-78"><a href="#cb48-78" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3) Estimate a spatial SAR regression model {.unnumbered}</span></span>
-<span id="cb48-79"><a href="#cb48-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-80"><a href="#cb48-80" aria-hidden="true" tabindex="-1"></a>a) Estimate a spatial autoregressive SAR model</span>
+<span id="cb48-71"><a href="#cb48-71" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-72"><a href="#cb48-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-73"><a href="#cb48-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-74"><a href="#cb48-74" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2) Estimate the extent of spatial auto-correlation {.unnumbered}</span></span>
+<span id="cb48-75"><a href="#cb48-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-78"><a href="#cb48-78" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-79"><a href="#cb48-79" aria-hidden="true" tabindex="-1"></a><span class="fu">moran.test</span>(msoa.spdf<span class="sc">$</span>no2, <span class="at">listw =</span> dist_15.lw)</span>
+<span id="cb48-80"><a href="#cb48-80" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb48-81"><a href="#cb48-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-84"><a href="#cb48-84" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb48-85"><a href="#cb48-85" aria-hidden="true" tabindex="-1"></a>mod_1.sar <span class="ot">&lt;-</span> <span class="fu">lagsarlm</span>(<span class="fu">log</span>(no2) <span class="sc">~</span> per_mixed <span class="sc">+</span> per_asian <span class="sc">+</span> per_black <span class="sc">+</span> per_other</span>
-<span id="cb48-86"><a href="#cb48-86" aria-hidden="true" tabindex="-1"></a>                      <span class="sc">+</span> per_nonUK_EU <span class="sc">+</span> per_nonEU  <span class="sc">+</span> <span class="fu">log</span>(POPDEN),  </span>
-<span id="cb48-87"><a href="#cb48-87" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data =</span> msoa.spdf, </span>
-<span id="cb48-88"><a href="#cb48-88" aria-hidden="true" tabindex="-1"></a>                      <span class="at">listw =</span> dist_15.lw,</span>
-<span id="cb48-89"><a href="#cb48-89" aria-hidden="true" tabindex="-1"></a>                      <span class="at">Durbin =</span> <span class="cn">FALSE</span>) <span class="co"># we could here extend to SDM</span></span>
-<span id="cb48-90"><a href="#cb48-90" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_1.sar)</span>
-<span id="cb48-91"><a href="#cb48-91" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb48-92"><a href="#cb48-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-93"><a href="#cb48-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-94"><a href="#cb48-94" aria-hidden="true" tabindex="-1"></a>b) Have a look into the true multiplier matrix $({\bm I_N}-\rho {\bm W})^{-1}\beta_k$</span>
-<span id="cb48-95"><a href="#cb48-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-98"><a href="#cb48-98" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb48-99"><a href="#cb48-99" aria-hidden="true" tabindex="-1"></a>W <span class="ot">&lt;-</span> <span class="fu">listw2mat</span>(dist_15.lw)</span>
-<span id="cb48-100"><a href="#cb48-100" aria-hidden="true" tabindex="-1"></a>I <span class="ot">&lt;-</span> <span class="fu">diag</span>(<span class="fu">dim</span>(W)[<span class="dv">1</span>])</span>
-<span id="cb48-101"><a href="#cb48-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-102"><a href="#cb48-102" aria-hidden="true" tabindex="-1"></a>rho <span class="ot">&lt;-</span> <span class="fu">unname</span>(mod_1.sar<span class="sc">$</span>rho)</span>
-<span id="cb48-103"><a href="#cb48-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-104"><a href="#cb48-104" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">solve</span>(I <span class="sc">-</span> rho<span class="sc">*</span>W)</span>
-<span id="cb48-105"><a href="#cb48-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-106"><a href="#cb48-106" aria-hidden="true" tabindex="-1"></a>M[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
-<span id="cb48-107"><a href="#cb48-107" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-82"><a href="#cb48-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-83"><a href="#cb48-83" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3) Estimate a spatial SAR regression model {.unnumbered}</span></span>
+<span id="cb48-84"><a href="#cb48-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-85"><a href="#cb48-85" aria-hidden="true" tabindex="-1"></a>a) Estimate a spatial autoregressive SAR model</span>
+<span id="cb48-86"><a href="#cb48-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-89"><a href="#cb48-89" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-90"><a href="#cb48-90" aria-hidden="true" tabindex="-1"></a>mod_1.sar <span class="ot">&lt;-</span> <span class="fu">lagsarlm</span>(<span class="fu">log</span>(no2) <span class="sc">~</span> per_mixed <span class="sc">+</span> per_asian <span class="sc">+</span> per_black <span class="sc">+</span> per_other</span>
+<span id="cb48-91"><a href="#cb48-91" aria-hidden="true" tabindex="-1"></a>                      <span class="sc">+</span> per_nonUK_EU <span class="sc">+</span> per_nonEU  <span class="sc">+</span> <span class="fu">log</span>(POPDEN),  </span>
+<span id="cb48-92"><a href="#cb48-92" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data =</span> msoa.spdf, </span>
+<span id="cb48-93"><a href="#cb48-93" aria-hidden="true" tabindex="-1"></a>                      <span class="at">listw =</span> dist_15.lw,</span>
+<span id="cb48-94"><a href="#cb48-94" aria-hidden="true" tabindex="-1"></a>                      <span class="at">Durbin =</span> <span class="cn">FALSE</span>) <span class="co"># we could here extend to SDM</span></span>
+<span id="cb48-95"><a href="#cb48-95" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_1.sar)</span>
+<span id="cb48-96"><a href="#cb48-96" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-97"><a href="#cb48-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-98"><a href="#cb48-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-99"><a href="#cb48-99" aria-hidden="true" tabindex="-1"></a>b) Have a look into the true multiplier matrix $({\bm I_N}-\rho {\bm W})^{-1}\beta_k$</span>
+<span id="cb48-100"><a href="#cb48-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-103"><a href="#cb48-103" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-104"><a href="#cb48-104" aria-hidden="true" tabindex="-1"></a>W <span class="ot">&lt;-</span> <span class="fu">listw2mat</span>(dist_15.lw)</span>
+<span id="cb48-105"><a href="#cb48-105" aria-hidden="true" tabindex="-1"></a>I <span class="ot">&lt;-</span> <span class="fu">diag</span>(<span class="fu">dim</span>(W)[<span class="dv">1</span>])</span>
+<span id="cb48-106"><a href="#cb48-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-107"><a href="#cb48-107" aria-hidden="true" tabindex="-1"></a>rho <span class="ot">&lt;-</span> <span class="fu">unname</span>(mod_1.sar<span class="sc">$</span>rho)</span>
 <span id="cb48-108"><a href="#cb48-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-109"><a href="#cb48-109" aria-hidden="true" tabindex="-1"></a>c) Create an $N \times N$ effects matrix. What is the effect of unit 6 on unit 10?</span>
+<span id="cb48-109"><a href="#cb48-109" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">solve</span>(I <span class="sc">-</span> rho<span class="sc">*</span>W)</span>
 <span id="cb48-110"><a href="#cb48-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-113"><a href="#cb48-113" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb48-114"><a href="#cb48-114" aria-hidden="true" tabindex="-1"></a><span class="co"># For beta 1</span></span>
+<span id="cb48-111"><a href="#cb48-111" aria-hidden="true" tabindex="-1"></a>M[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
+<span id="cb48-112"><a href="#cb48-112" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-113"><a href="#cb48-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-114"><a href="#cb48-114" aria-hidden="true" tabindex="-1"></a>c) Create an $N \times N$ effects matrix. What is the effect of unit 6 on unit 10?</span>
 <span id="cb48-115"><a href="#cb48-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-116"><a href="#cb48-116" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> mod_1.sar<span class="sc">$</span>coefficients</span>
-<span id="cb48-117"><a href="#cb48-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-118"><a href="#cb48-118" aria-hidden="true" tabindex="-1"></a>effM <span class="ot">&lt;-</span> beta[<span class="dv">2</span>] <span class="sc">*</span> M</span>
-<span id="cb48-119"><a href="#cb48-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-120"><a href="#cb48-120" aria-hidden="true" tabindex="-1"></a>effM[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
-<span id="cb48-121"><a href="#cb48-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-122"><a href="#cb48-122" aria-hidden="true" tabindex="-1"></a><span class="co"># "Effect" of unit 6 on unit 10</span></span>
-<span id="cb48-123"><a href="#cb48-123" aria-hidden="true" tabindex="-1"></a>effM[<span class="dv">10</span>, <span class="dv">6</span>]</span>
-<span id="cb48-124"><a href="#cb48-124" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb48-125"><a href="#cb48-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-126"><a href="#cb48-126" aria-hidden="true" tabindex="-1"></a>d) Estimate a spatial autoregressive SLX model</span>
-<span id="cb48-127"><a href="#cb48-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-128"><a href="#cb48-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-131"><a href="#cb48-131" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb48-132"><a href="#cb48-132" aria-hidden="true" tabindex="-1"></a>mod_1.slx <span class="ot">&lt;-</span> <span class="fu">lmSLX</span>(<span class="fu">log</span>(no2) <span class="sc">~</span> per_mixed <span class="sc">+</span> per_asian <span class="sc">+</span> per_black <span class="sc">+</span> per_other</span>
-<span id="cb48-133"><a href="#cb48-133" aria-hidden="true" tabindex="-1"></a>                      <span class="sc">+</span> per_nonUK_EU <span class="sc">+</span> per_nonEU  <span class="sc">+</span> <span class="fu">log</span>(POPDEN),  </span>
-<span id="cb48-134"><a href="#cb48-134" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data =</span> msoa.spdf, </span>
-<span id="cb48-135"><a href="#cb48-135" aria-hidden="true" tabindex="-1"></a>                      <span class="at">listw =</span> dist_15.lw,</span>
-<span id="cb48-136"><a href="#cb48-136" aria-hidden="true" tabindex="-1"></a>                  <span class="at">Durbin =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb48-137"><a href="#cb48-137" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb48-138"><a href="#cb48-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-139"><a href="#cb48-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-140"><a href="#cb48-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-141"><a href="#cb48-141" aria-hidden="true" tabindex="-1"></a>e) Calculate and interpret the summary impact measures for SAR and SLX.</span>
-<span id="cb48-142"><a href="#cb48-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-145"><a href="#cb48-145" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb48-146"><a href="#cb48-146" aria-hidden="true" tabindex="-1"></a>mod_1.sar.imp <span class="ot">&lt;-</span> <span class="fu">impacts</span>(mod_1.sar, <span class="at">listw =</span> dist_15.lw, <span class="at">R =</span> <span class="dv">300</span>)</span>
-<span id="cb48-147"><a href="#cb48-147" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_1.sar.imp)</span>
-<span id="cb48-148"><a href="#cb48-148" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb48-149"><a href="#cb48-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-150"><a href="#cb48-150" aria-hidden="true" tabindex="-1"></a>For SLX, you can just interpret the coefficients. Impacts will give you the same results.</span>
-<span id="cb48-151"><a href="#cb48-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-152"><a href="#cb48-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-153"><a href="#cb48-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-154"><a href="#cb48-154" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4) Is SAR the right model choice or would you rather estimate a different model? {.unnumbered}</span></span>
-<span id="cb48-155"><a href="#cb48-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-156"><a href="#cb48-156" aria-hidden="true" tabindex="-1"></a>f) How do results change once you specify a spatial Durbin model?</span>
+<span id="cb48-118"><a href="#cb48-118" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-119"><a href="#cb48-119" aria-hidden="true" tabindex="-1"></a><span class="co"># For beta 1</span></span>
+<span id="cb48-120"><a href="#cb48-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-121"><a href="#cb48-121" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> mod_1.sar<span class="sc">$</span>coefficients</span>
+<span id="cb48-122"><a href="#cb48-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-123"><a href="#cb48-123" aria-hidden="true" tabindex="-1"></a>effM <span class="ot">&lt;-</span> beta[<span class="dv">2</span>] <span class="sc">*</span> M</span>
+<span id="cb48-124"><a href="#cb48-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-125"><a href="#cb48-125" aria-hidden="true" tabindex="-1"></a>effM[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
+<span id="cb48-126"><a href="#cb48-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-127"><a href="#cb48-127" aria-hidden="true" tabindex="-1"></a><span class="co"># "Effect" of unit 6 on unit 10</span></span>
+<span id="cb48-128"><a href="#cb48-128" aria-hidden="true" tabindex="-1"></a>effM[<span class="dv">10</span>, <span class="dv">6</span>]</span>
+<span id="cb48-129"><a href="#cb48-129" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-130"><a href="#cb48-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-131"><a href="#cb48-131" aria-hidden="true" tabindex="-1"></a>d) Estimate a spatial autoregressive SLX model</span>
+<span id="cb48-132"><a href="#cb48-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-133"><a href="#cb48-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-136"><a href="#cb48-136" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-137"><a href="#cb48-137" aria-hidden="true" tabindex="-1"></a>mod_1.slx <span class="ot">&lt;-</span> <span class="fu">lmSLX</span>(<span class="fu">log</span>(no2) <span class="sc">~</span> per_mixed <span class="sc">+</span> per_asian <span class="sc">+</span> per_black <span class="sc">+</span> per_other</span>
+<span id="cb48-138"><a href="#cb48-138" aria-hidden="true" tabindex="-1"></a>                      <span class="sc">+</span> per_nonUK_EU <span class="sc">+</span> per_nonEU  <span class="sc">+</span> <span class="fu">log</span>(POPDEN),  </span>
+<span id="cb48-139"><a href="#cb48-139" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data =</span> msoa.spdf, </span>
+<span id="cb48-140"><a href="#cb48-140" aria-hidden="true" tabindex="-1"></a>                      <span class="at">listw =</span> dist_15.lw,</span>
+<span id="cb48-141"><a href="#cb48-141" aria-hidden="true" tabindex="-1"></a>                  <span class="at">Durbin =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb48-142"><a href="#cb48-142" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-143"><a href="#cb48-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-144"><a href="#cb48-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-145"><a href="#cb48-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-146"><a href="#cb48-146" aria-hidden="true" tabindex="-1"></a>e) Calculate and interpret the summary impact measures for SAR and SLX.</span>
+<span id="cb48-147"><a href="#cb48-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-150"><a href="#cb48-150" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-151"><a href="#cb48-151" aria-hidden="true" tabindex="-1"></a>mod_1.sar.imp <span class="ot">&lt;-</span> <span class="fu">impacts</span>(mod_1.sar, <span class="at">listw =</span> dist_15.lw, <span class="at">R =</span> <span class="dv">300</span>)</span>
+<span id="cb48-152"><a href="#cb48-152" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_1.sar.imp)</span>
+<span id="cb48-153"><a href="#cb48-153" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-154"><a href="#cb48-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-155"><a href="#cb48-155" aria-hidden="true" tabindex="-1"></a>For SLX, you can just interpret the coefficients. Impacts will give you the same results.</span>
+<span id="cb48-156"><a href="#cb48-156" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-157"><a href="#cb48-157" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-158"><a href="#cb48-158" aria-hidden="true" tabindex="-1"></a>g) Please calculate and interpret the impacts for a spatial Durbin model.</span>
-<span id="cb48-159"><a href="#cb48-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-158"><a href="#cb48-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-159"><a href="#cb48-159" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4) Is SAR the right model choice or would you rather estimate a different model? {.unnumbered}</span></span>
 <span id="cb48-160"><a href="#cb48-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-161"><a href="#cb48-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-161"><a href="#cb48-161" aria-hidden="true" tabindex="-1"></a>f) How do results change once you specify a spatial Durbin model?</span>
 <span id="cb48-162"><a href="#cb48-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-163"><a href="#cb48-163" aria-hidden="true" tabindex="-1"></a><span class="fu">## Life Expecatancy in Germany</span></span>
+<span id="cb48-163"><a href="#cb48-163" aria-hidden="true" tabindex="-1"></a>g) Please calculate and interpret the impacts for a spatial Durbin model.</span>
 <span id="cb48-164"><a href="#cb48-164" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-165"><a href="#cb48-165" aria-hidden="true" tabindex="-1"></a>Below, we read and transform some characteristics of the <span class="co">[</span><span class="ot">INKAR data</span><span class="co">](https://www.inkar.de/)</span> on German counties.</span>
+<span id="cb48-165"><a href="#cb48-165" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-166"><a href="#cb48-166" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-167"><a href="#cb48-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-170"><a href="#cb48-170" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb48-171"><a href="#cb48-171" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"_data/inkar2.Rdata"</span>)</span>
-<span id="cb48-172"><a href="#cb48-172" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb48-173"><a href="#cb48-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-174"><a href="#cb48-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-175"><a href="#cb48-175" aria-hidden="true" tabindex="-1"></a>Variables are</span>
-<span id="cb48-176"><a href="#cb48-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-177"><a href="#cb48-177" aria-hidden="true" tabindex="-1"></a>| Variable | Description |</span>
-<span id="cb48-178"><a href="#cb48-178" aria-hidden="true" tabindex="-1"></a>| ------------                     | ------------ |</span>
-<span id="cb48-179"><a href="#cb48-179" aria-hidden="true" tabindex="-1"></a>| "Kennziffer"                      | ID                                         |</span>
-<span id="cb48-180"><a href="#cb48-180" aria-hidden="true" tabindex="-1"></a>| "Raumeinheit"                     | Name                                       |</span>
-<span id="cb48-181"><a href="#cb48-181" aria-hidden="true" tabindex="-1"></a>| "Aggregat"                        | Level                                      |</span>
-<span id="cb48-182"><a href="#cb48-182" aria-hidden="true" tabindex="-1"></a>| "year"                            | Year                                       |</span>
-<span id="cb48-183"><a href="#cb48-183" aria-hidden="true" tabindex="-1"></a>| "poluation_density"               | Population Density       |</span>
-<span id="cb48-184"><a href="#cb48-184" aria-hidden="true" tabindex="-1"></a>| "median_income"                   | Median Household income (only for 2020)                   |</span>
-<span id="cb48-185"><a href="#cb48-185" aria-hidden="true" tabindex="-1"></a>| "gdp_in1000EUR"                   | Gross Domestic Product in 1000 euros                            |</span>
-<span id="cb48-186"><a href="#cb48-186" aria-hidden="true" tabindex="-1"></a>| "unemployment_rate"               | Unemployment rate                            |</span>
-<span id="cb48-187"><a href="#cb48-187" aria-hidden="true" tabindex="-1"></a>| "share_longterm_unemployed"       | Share of longterm unemployed (among unemployed)                               |</span>
-<span id="cb48-188"><a href="#cb48-188" aria-hidden="true" tabindex="-1"></a>| "share_working_indutry"           | Share of employees in undistrial sector                    |</span>
-<span id="cb48-189"><a href="#cb48-189" aria-hidden="true" tabindex="-1"></a>| "share_foreigners"                | Share of foreign nationals                              |</span>
-<span id="cb48-190"><a href="#cb48-190" aria-hidden="true" tabindex="-1"></a>| "share_college"                   | Share of school-finishers with college degree                              |</span>
-<span id="cb48-191"><a href="#cb48-191" aria-hidden="true" tabindex="-1"></a>| "recreational_space"              | Recreational space per inhabitant                           |</span>
-<span id="cb48-192"><a href="#cb48-192" aria-hidden="true" tabindex="-1"></a>| "car_density"                     | Density of cars                                 |</span>
-<span id="cb48-193"><a href="#cb48-193" aria-hidden="true" tabindex="-1"></a>| "life_expectancy"                 | Life expectancy       |</span>
-<span id="cb48-194"><a href="#cb48-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-195"><a href="#cb48-195" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-196"><a href="#cb48-196" aria-hidden="true" tabindex="-1"></a>And we get the respective county shapes:</span>
-<span id="cb48-197"><a href="#cb48-197" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-200"><a href="#cb48-200" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb48-201"><a href="#cb48-201" aria-hidden="true" tabindex="-1"></a>kreise.spdf <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">"_data/vg5000_ebenen_1231"</span>,</span>
-<span id="cb48-202"><a href="#cb48-202" aria-hidden="true" tabindex="-1"></a>                       <span class="at">layer =</span> <span class="st">"VG5000_KRS"</span>)</span>
-<span id="cb48-203"><a href="#cb48-203" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb48-204"><a href="#cb48-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-205"><a href="#cb48-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-206"><a href="#cb48-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-207"><a href="#cb48-207" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span><span class="al">###</span><span class="co"> Please map the life expectancy across Germany --&gt;</span></span>
-<span id="cb48-208"><a href="#cb48-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-209"><a href="#cb48-209" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span><span class="al">###</span><span class="co"> Test the effect of regional characteristics on life expectancy --&gt;</span></span>
+<span id="cb48-168"><a href="#cb48-168" aria-hidden="true" tabindex="-1"></a><span class="fu">## Life Expecatancy in Germany</span></span>
+<span id="cb48-169"><a href="#cb48-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-170"><a href="#cb48-170" aria-hidden="true" tabindex="-1"></a>Below, we read and transform some characteristics of the <span class="co">[</span><span class="ot">INKAR data</span><span class="co">](https://www.inkar.de/)</span> on German counties.</span>
+<span id="cb48-171"><a href="#cb48-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-172"><a href="#cb48-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-175"><a href="#cb48-175" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-176"><a href="#cb48-176" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"_data/inkar2.Rdata"</span>)</span>
+<span id="cb48-177"><a href="#cb48-177" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-178"><a href="#cb48-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-179"><a href="#cb48-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-180"><a href="#cb48-180" aria-hidden="true" tabindex="-1"></a>Variables are</span>
+<span id="cb48-181"><a href="#cb48-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-182"><a href="#cb48-182" aria-hidden="true" tabindex="-1"></a>| Variable | Description |</span>
+<span id="cb48-183"><a href="#cb48-183" aria-hidden="true" tabindex="-1"></a>| ------------                     | ------------ |</span>
+<span id="cb48-184"><a href="#cb48-184" aria-hidden="true" tabindex="-1"></a>| "Kennziffer"                      | ID                                         |</span>
+<span id="cb48-185"><a href="#cb48-185" aria-hidden="true" tabindex="-1"></a>| "Raumeinheit"                     | Name                                       |</span>
+<span id="cb48-186"><a href="#cb48-186" aria-hidden="true" tabindex="-1"></a>| "Aggregat"                        | Level                                      |</span>
+<span id="cb48-187"><a href="#cb48-187" aria-hidden="true" tabindex="-1"></a>| "year"                            | Year                                       |</span>
+<span id="cb48-188"><a href="#cb48-188" aria-hidden="true" tabindex="-1"></a>| "poluation_density"               | Population Density       |</span>
+<span id="cb48-189"><a href="#cb48-189" aria-hidden="true" tabindex="-1"></a>| "median_income"                   | Median Household income (only for 2020)                   |</span>
+<span id="cb48-190"><a href="#cb48-190" aria-hidden="true" tabindex="-1"></a>| "gdp_in1000EUR"                   | Gross Domestic Product in 1000 euros                            |</span>
+<span id="cb48-191"><a href="#cb48-191" aria-hidden="true" tabindex="-1"></a>| "unemployment_rate"               | Unemployment rate                            |</span>
+<span id="cb48-192"><a href="#cb48-192" aria-hidden="true" tabindex="-1"></a>| "share_longterm_unemployed"       | Share of longterm unemployed (among unemployed)                               |</span>
+<span id="cb48-193"><a href="#cb48-193" aria-hidden="true" tabindex="-1"></a>| "share_working_indutry"           | Share of employees in undistrial sector                    |</span>
+<span id="cb48-194"><a href="#cb48-194" aria-hidden="true" tabindex="-1"></a>| "share_foreigners"                | Share of foreign nationals                              |</span>
+<span id="cb48-195"><a href="#cb48-195" aria-hidden="true" tabindex="-1"></a>| "share_college"                   | Share of school-finishers with college degree                              |</span>
+<span id="cb48-196"><a href="#cb48-196" aria-hidden="true" tabindex="-1"></a>| "recreational_space"              | Recreational space per inhabitant                           |</span>
+<span id="cb48-197"><a href="#cb48-197" aria-hidden="true" tabindex="-1"></a>| "car_density"                     | Density of cars                                 |</span>
+<span id="cb48-198"><a href="#cb48-198" aria-hidden="true" tabindex="-1"></a>| "life_expectancy"                 | Life expectancy       |</span>
+<span id="cb48-199"><a href="#cb48-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-200"><a href="#cb48-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-201"><a href="#cb48-201" aria-hidden="true" tabindex="-1"></a>And we get the respective county shapes:</span>
+<span id="cb48-202"><a href="#cb48-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-205"><a href="#cb48-205" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-206"><a href="#cb48-206" aria-hidden="true" tabindex="-1"></a>kreise.spdf <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">"_data/vg5000_ebenen_1231"</span>,</span>
+<span id="cb48-207"><a href="#cb48-207" aria-hidden="true" tabindex="-1"></a>                       <span class="at">layer =</span> <span class="st">"VG5000_KRS"</span>)</span>
+<span id="cb48-208"><a href="#cb48-208" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-209"><a href="#cb48-209" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-210"><a href="#cb48-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-211"><a href="#cb48-211" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1) Merge data with the shape file (as with conventional data)</span></span>
-<span id="cb48-212"><a href="#cb48-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-215"><a href="#cb48-215" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb48-216"><a href="#cb48-216" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge</span></span>
-<span id="cb48-217"><a href="#cb48-217" aria-hidden="true" tabindex="-1"></a>inkar_2020.spdf <span class="ot">&lt;-</span> <span class="fu">merge</span>(kreise.spdf, inkar.df[inkar.df<span class="sc">$</span>year <span class="sc">==</span> <span class="dv">2020</span>, ], </span>
-<span id="cb48-218"><a href="#cb48-218" aria-hidden="true" tabindex="-1"></a>                         <span class="at">by.x =</span> <span class="st">"AGS"</span>, <span class="at">by.y =</span> <span class="st">"Kennziffer"</span>)</span>
-<span id="cb48-219"><a href="#cb48-219" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb48-220"><a href="#cb48-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-221"><a href="#cb48-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-222"><a href="#cb48-222" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-223"><a href="#cb48-223" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2) Create a map of life-expectancy</span></span>
-<span id="cb48-224"><a href="#cb48-224" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-227"><a href="#cb48-227" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb48-228"><a href="#cb48-228" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">viridis</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">option =</span> <span class="st">"G"</span>)</span>
+<span id="cb48-211"><a href="#cb48-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-212"><a href="#cb48-212" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span><span class="al">###</span><span class="co"> Please map the life expectancy across Germany --&gt;</span></span>
+<span id="cb48-213"><a href="#cb48-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-214"><a href="#cb48-214" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span><span class="al">###</span><span class="co"> Test the effect of regional characteristics on life expectancy --&gt;</span></span>
+<span id="cb48-215"><a href="#cb48-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-216"><a href="#cb48-216" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1) Merge data with the shape file (as with conventional data)</span></span>
+<span id="cb48-217"><a href="#cb48-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-220"><a href="#cb48-220" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-221"><a href="#cb48-221" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge</span></span>
+<span id="cb48-222"><a href="#cb48-222" aria-hidden="true" tabindex="-1"></a>inkar_2020.spdf <span class="ot">&lt;-</span> <span class="fu">merge</span>(kreise.spdf, inkar.df[inkar.df<span class="sc">$</span>year <span class="sc">==</span> <span class="dv">2020</span>, ], </span>
+<span id="cb48-223"><a href="#cb48-223" aria-hidden="true" tabindex="-1"></a>                         <span class="at">by.x =</span> <span class="st">"AGS"</span>, <span class="at">by.y =</span> <span class="st">"Kennziffer"</span>)</span>
+<span id="cb48-224"><a href="#cb48-224" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-225"><a href="#cb48-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-226"><a href="#cb48-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-227"><a href="#cb48-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-228"><a href="#cb48-228" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2) Create a map of life-expectancy</span></span>
 <span id="cb48-229"><a href="#cb48-229" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-230"><a href="#cb48-230" aria-hidden="true" tabindex="-1"></a>mp1 <span class="ot">&lt;-</span>  <span class="fu">tm_shape</span>(inkar_2020.spdf) <span class="sc">+</span> </span>
-<span id="cb48-231"><a href="#cb48-231" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="at">col =</span> <span class="st">"life_expectancy"</span>, </span>
-<span id="cb48-232"><a href="#cb48-232" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"cont"</span>, <span class="co"># algorithm to def cut points</span></span>
-<span id="cb48-233"><a href="#cb48-233" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> cols, <span class="co"># colours</span></span>
-<span id="cb48-234"><a href="#cb48-234" aria-hidden="true" tabindex="-1"></a>          <span class="at">stretch.palette =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb48-235"><a href="#cb48-235" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"in years"</span></span>
-<span id="cb48-236"><a href="#cb48-236" aria-hidden="true" tabindex="-1"></a>          ) <span class="sc">+</span></span>
-<span id="cb48-237"><a href="#cb48-237" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">col =</span> <span class="st">"white"</span>, <span class="at">lwd =</span> <span class="fl">0.5</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb48-238"><a href="#cb48-238" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">frame =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb48-239"><a href="#cb48-239" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.frame =</span> <span class="cn">TRUE</span>, <span class="at">legend.bg.color =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb48-240"><a href="#cb48-240" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.position =</span> <span class="fu">c</span>(<span class="st">"right"</span>, <span class="st">"bottom"</span>),</span>
-<span id="cb48-241"><a href="#cb48-241" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.outside =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb48-242"><a href="#cb48-242" aria-hidden="true" tabindex="-1"></a>            <span class="at">main.title =</span> <span class="st">"Life expectancy"</span>, </span>
-<span id="cb48-243"><a href="#cb48-243" aria-hidden="true" tabindex="-1"></a>            <span class="at">main.title.position =</span> <span class="st">"center"</span>,</span>
-<span id="cb48-244"><a href="#cb48-244" aria-hidden="true" tabindex="-1"></a>            <span class="at">main.title.size =</span> <span class="fl">1.6</span>,</span>
-<span id="cb48-245"><a href="#cb48-245" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.title.size =</span> <span class="fl">0.8</span>,</span>
-<span id="cb48-246"><a href="#cb48-246" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.text.size =</span> <span class="fl">0.8</span>)</span>
-<span id="cb48-247"><a href="#cb48-247" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-248"><a href="#cb48-248" aria-hidden="true" tabindex="-1"></a>mp1</span>
-<span id="cb48-249"><a href="#cb48-249" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb48-250"><a href="#cb48-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-251"><a href="#cb48-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-232"><a href="#cb48-232" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-233"><a href="#cb48-233" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">viridis</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">option =</span> <span class="st">"G"</span>)</span>
+<span id="cb48-234"><a href="#cb48-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-235"><a href="#cb48-235" aria-hidden="true" tabindex="-1"></a>mp1 <span class="ot">&lt;-</span>  <span class="fu">tm_shape</span>(inkar_2020.spdf) <span class="sc">+</span> </span>
+<span id="cb48-236"><a href="#cb48-236" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="at">col =</span> <span class="st">"life_expectancy"</span>, </span>
+<span id="cb48-237"><a href="#cb48-237" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"cont"</span>, <span class="co"># algorithm to def cut points</span></span>
+<span id="cb48-238"><a href="#cb48-238" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> cols, <span class="co"># colours</span></span>
+<span id="cb48-239"><a href="#cb48-239" aria-hidden="true" tabindex="-1"></a>          <span class="at">stretch.palette =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb48-240"><a href="#cb48-240" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"in years"</span></span>
+<span id="cb48-241"><a href="#cb48-241" aria-hidden="true" tabindex="-1"></a>          ) <span class="sc">+</span></span>
+<span id="cb48-242"><a href="#cb48-242" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">col =</span> <span class="st">"white"</span>, <span class="at">lwd =</span> <span class="fl">0.5</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb48-243"><a href="#cb48-243" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">frame =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb48-244"><a href="#cb48-244" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.frame =</span> <span class="cn">TRUE</span>, <span class="at">legend.bg.color =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb48-245"><a href="#cb48-245" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.position =</span> <span class="fu">c</span>(<span class="st">"right"</span>, <span class="st">"bottom"</span>),</span>
+<span id="cb48-246"><a href="#cb48-246" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.outside =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb48-247"><a href="#cb48-247" aria-hidden="true" tabindex="-1"></a>            <span class="at">main.title =</span> <span class="st">"Life expectancy"</span>, </span>
+<span id="cb48-248"><a href="#cb48-248" aria-hidden="true" tabindex="-1"></a>            <span class="at">main.title.position =</span> <span class="st">"center"</span>,</span>
+<span id="cb48-249"><a href="#cb48-249" aria-hidden="true" tabindex="-1"></a>            <span class="at">main.title.size =</span> <span class="fl">1.6</span>,</span>
+<span id="cb48-250"><a href="#cb48-250" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.title.size =</span> <span class="fl">0.8</span>,</span>
+<span id="cb48-251"><a href="#cb48-251" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.text.size =</span> <span class="fl">0.8</span>)</span>
 <span id="cb48-252"><a href="#cb48-252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-253"><a href="#cb48-253" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3) Chose some variables that could predict life expectancy. See for instance the [following paper](https://doi.org/10.1073/pnas.2003719117).</span></span>
-<span id="cb48-254"><a href="#cb48-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-253"><a href="#cb48-253" aria-hidden="true" tabindex="-1"></a>mp1</span>
+<span id="cb48-254"><a href="#cb48-254" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb48-255"><a href="#cb48-255" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-256"><a href="#cb48-256" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4) Generate a neighbours object (e.g. the 10 nearest neighbours).</span></span>
+<span id="cb48-256"><a href="#cb48-256" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-257"><a href="#cb48-257" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-260"><a href="#cb48-260" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb48-261"><a href="#cb48-261" aria-hidden="true" tabindex="-1"></a><span class="co"># nb &lt;- poly2nb(kreise.spdf, row.names = "ags", queen = TRUE)</span></span>
-<span id="cb48-262"><a href="#cb48-262" aria-hidden="true" tabindex="-1"></a>knn <span class="ot">&lt;-</span> <span class="fu">knearneigh</span>(<span class="fu">st_centroid</span>(kreise.spdf), <span class="at">k =</span> <span class="dv">10</span>)</span>
-<span id="cb48-263"><a href="#cb48-263" aria-hidden="true" tabindex="-1"></a>nb <span class="ot">&lt;-</span> <span class="fu">knn2nb</span>(knn, <span class="at">row.names =</span> kreise.spdf<span class="sc">$</span>ags)</span>
-<span id="cb48-264"><a href="#cb48-264" aria-hidden="true" tabindex="-1"></a>listw <span class="ot">&lt;-</span> <span class="fu">nb2listw</span>(nb, <span class="at">style =</span> <span class="st">"W"</span>)</span>
-<span id="cb48-265"><a href="#cb48-265" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb48-266"><a href="#cb48-266" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-267"><a href="#cb48-267" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-268"><a href="#cb48-268" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-269"><a href="#cb48-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-270"><a href="#cb48-270" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5) Estimate a cross-sectional spatial model for the year 2020 and calculate the impacts.</span></span>
+<span id="cb48-258"><a href="#cb48-258" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3) Chose some variables that could predict life expectancy. See for instance the [following paper](https://doi.org/10.1073/pnas.2003719117).</span></span>
+<span id="cb48-259"><a href="#cb48-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-260"><a href="#cb48-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-261"><a href="#cb48-261" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4) Generate a neighbours object (e.g. the 10 nearest neighbours).</span></span>
+<span id="cb48-262"><a href="#cb48-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-265"><a href="#cb48-265" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-266"><a href="#cb48-266" aria-hidden="true" tabindex="-1"></a><span class="co"># nb &lt;- poly2nb(kreise.spdf, row.names = "ags", queen = TRUE)</span></span>
+<span id="cb48-267"><a href="#cb48-267" aria-hidden="true" tabindex="-1"></a>knn <span class="ot">&lt;-</span> <span class="fu">knearneigh</span>(<span class="fu">st_centroid</span>(kreise.spdf), <span class="at">k =</span> <span class="dv">10</span>)</span>
+<span id="cb48-268"><a href="#cb48-268" aria-hidden="true" tabindex="-1"></a>nb <span class="ot">&lt;-</span> <span class="fu">knn2nb</span>(knn, <span class="at">row.names =</span> kreise.spdf<span class="sc">$</span>ags)</span>
+<span id="cb48-269"><a href="#cb48-269" aria-hidden="true" tabindex="-1"></a>listw <span class="ot">&lt;-</span> <span class="fu">nb2listw</span>(nb, <span class="at">style =</span> <span class="st">"W"</span>)</span>
+<span id="cb48-270"><a href="#cb48-270" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb48-271"><a href="#cb48-271" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-272"><a href="#cb48-272" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-275"><a href="#cb48-275" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb48-276"><a href="#cb48-276" aria-hidden="true" tabindex="-1"></a><span class="do">### Use a spatial Durbin Error model</span></span>
+<span id="cb48-273"><a href="#cb48-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-274"><a href="#cb48-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-275"><a href="#cb48-275" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5) Estimate a cross-sectional spatial model for the year 2020 and calculate the impacts.</span></span>
+<span id="cb48-276"><a href="#cb48-276" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-277"><a href="#cb48-277" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-278"><a href="#cb48-278" aria-hidden="true" tabindex="-1"></a><span class="co"># Spec formula</span></span>
-<span id="cb48-279"><a href="#cb48-279" aria-hidden="true" tabindex="-1"></a>fm <span class="ot">&lt;-</span> life_expectancy <span class="sc">~</span> median_income <span class="sc">+</span> unemployment_rate <span class="sc">+</span> share_college <span class="sc">+</span> car_density</span>
-<span id="cb48-280"><a href="#cb48-280" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-281"><a href="#cb48-281" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate error model with Durbin = TRUE </span></span>
-<span id="cb48-282"><a href="#cb48-282" aria-hidden="true" tabindex="-1"></a>mod_1.durb <span class="ot">&lt;-</span> <span class="fu">errorsarlm</span>(fm,  </span>
-<span id="cb48-283"><a href="#cb48-283" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data =</span> inkar_2020.spdf, </span>
-<span id="cb48-284"><a href="#cb48-284" aria-hidden="true" tabindex="-1"></a>                      <span class="at">listw =</span> listw,</span>
-<span id="cb48-285"><a href="#cb48-285" aria-hidden="true" tabindex="-1"></a>                      <span class="at">Durbin =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb48-286"><a href="#cb48-286" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-287"><a href="#cb48-287" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_1.durb)</span>
-<span id="cb48-288"><a href="#cb48-288" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-289"><a href="#cb48-289" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate impacts (which is unnecessary in this case)</span></span>
-<span id="cb48-290"><a href="#cb48-290" aria-hidden="true" tabindex="-1"></a>mod_1.durb.imp <span class="ot">&lt;-</span> <span class="fu">impacts</span>(mod_1.durb, <span class="at">listw =</span> listw, <span class="at">R =</span> <span class="dv">300</span>)</span>
-<span id="cb48-291"><a href="#cb48-291" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_1.durb.imp, <span class="at">zstats =</span> <span class="cn">TRUE</span>, <span class="at">short =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb48-292"><a href="#cb48-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-293"><a href="#cb48-293" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb48-294"><a href="#cb48-294" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-295"><a href="#cb48-295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-296"><a href="#cb48-296" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-297"><a href="#cb48-297" aria-hidden="true" tabindex="-1"></a><span class="fu">### 6) Calculate the spatial lagged variables for your covariates (e.g. use create_WX(), which needs a non-spatial df as input) .</span></span>
-<span id="cb48-298"><a href="#cb48-298" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-301"><a href="#cb48-301" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb48-302"><a href="#cb48-302" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract covariate names</span></span>
-<span id="cb48-303"><a href="#cb48-303" aria-hidden="true" tabindex="-1"></a>covars <span class="ot">&lt;-</span> <span class="fu">attr</span>(<span class="fu">terms</span>(fm),<span class="st">"term.labels"</span>)</span>
-<span id="cb48-304"><a href="#cb48-304" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-305"><a href="#cb48-305" aria-hidden="true" tabindex="-1"></a>w_vars <span class="ot">&lt;-</span> <span class="fu">create_WX</span>(<span class="fu">st_drop_geometry</span>(inkar_2020.spdf)[, covars],</span>
-<span id="cb48-306"><a href="#cb48-306" aria-hidden="true" tabindex="-1"></a>                    <span class="at">listw =</span> listw,</span>
-<span id="cb48-307"><a href="#cb48-307" aria-hidden="true" tabindex="-1"></a>                    <span class="at">prefix =</span> <span class="st">"w"</span>)</span>
-<span id="cb48-308"><a href="#cb48-308" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-309"><a href="#cb48-309" aria-hidden="true" tabindex="-1"></a>inkar_2020.spdf <span class="ot">&lt;-</span> <span class="fu">cbind</span>(inkar_2020.spdf, w_vars)</span>
-<span id="cb48-310"><a href="#cb48-310" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb48-311"><a href="#cb48-311" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-312"><a href="#cb48-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-280"><a href="#cb48-280" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-281"><a href="#cb48-281" aria-hidden="true" tabindex="-1"></a><span class="do">### Use a spatial Durbin Error model</span></span>
+<span id="cb48-282"><a href="#cb48-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-283"><a href="#cb48-283" aria-hidden="true" tabindex="-1"></a><span class="co"># Spec formula</span></span>
+<span id="cb48-284"><a href="#cb48-284" aria-hidden="true" tabindex="-1"></a>fm <span class="ot">&lt;-</span> life_expectancy <span class="sc">~</span> median_income <span class="sc">+</span> unemployment_rate <span class="sc">+</span> share_college <span class="sc">+</span> car_density</span>
+<span id="cb48-285"><a href="#cb48-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-286"><a href="#cb48-286" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate error model with Durbin = TRUE </span></span>
+<span id="cb48-287"><a href="#cb48-287" aria-hidden="true" tabindex="-1"></a>mod_1.durb <span class="ot">&lt;-</span> <span class="fu">errorsarlm</span>(fm,  </span>
+<span id="cb48-288"><a href="#cb48-288" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data =</span> inkar_2020.spdf, </span>
+<span id="cb48-289"><a href="#cb48-289" aria-hidden="true" tabindex="-1"></a>                      <span class="at">listw =</span> listw,</span>
+<span id="cb48-290"><a href="#cb48-290" aria-hidden="true" tabindex="-1"></a>                      <span class="at">Durbin =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb48-291"><a href="#cb48-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-292"><a href="#cb48-292" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_1.durb)</span>
+<span id="cb48-293"><a href="#cb48-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-294"><a href="#cb48-294" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate impacts (which is unnecessary in this case)</span></span>
+<span id="cb48-295"><a href="#cb48-295" aria-hidden="true" tabindex="-1"></a>mod_1.durb.imp <span class="ot">&lt;-</span> <span class="fu">impacts</span>(mod_1.durb, <span class="at">listw =</span> listw, <span class="at">R =</span> <span class="dv">300</span>)</span>
+<span id="cb48-296"><a href="#cb48-296" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_1.durb.imp, <span class="at">zstats =</span> <span class="cn">TRUE</span>, <span class="at">short =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb48-297"><a href="#cb48-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-298"><a href="#cb48-298" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-299"><a href="#cb48-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-300"><a href="#cb48-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-301"><a href="#cb48-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-302"><a href="#cb48-302" aria-hidden="true" tabindex="-1"></a><span class="fu">### 6) Calculate the spatial lagged variables for your covariates (e.g. use create_WX(), which needs a non-spatial df as input) .</span></span>
+<span id="cb48-303"><a href="#cb48-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-306"><a href="#cb48-306" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-307"><a href="#cb48-307" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract covariate names</span></span>
+<span id="cb48-308"><a href="#cb48-308" aria-hidden="true" tabindex="-1"></a>covars <span class="ot">&lt;-</span> <span class="fu">attr</span>(<span class="fu">terms</span>(fm),<span class="st">"term.labels"</span>)</span>
+<span id="cb48-309"><a href="#cb48-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-310"><a href="#cb48-310" aria-hidden="true" tabindex="-1"></a>w_vars <span class="ot">&lt;-</span> <span class="fu">create_WX</span>(<span class="fu">st_drop_geometry</span>(inkar_2020.spdf)[, covars],</span>
+<span id="cb48-311"><a href="#cb48-311" aria-hidden="true" tabindex="-1"></a>                    <span class="at">listw =</span> listw,</span>
+<span id="cb48-312"><a href="#cb48-312" aria-hidden="true" tabindex="-1"></a>                    <span class="at">prefix =</span> <span class="st">"w"</span>)</span>
 <span id="cb48-313"><a href="#cb48-313" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-314"><a href="#cb48-314" aria-hidden="true" tabindex="-1"></a><span class="fu">### 6) Can you run a spatial machine learning model? (for instance, using `randomForest`)?</span></span>
-<span id="cb48-315"><a href="#cb48-315" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-318"><a href="#cb48-318" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb48-319"><a href="#cb48-319" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(randomForest)</span>
+<span id="cb48-314"><a href="#cb48-314" aria-hidden="true" tabindex="-1"></a>inkar_2020.spdf <span class="ot">&lt;-</span> <span class="fu">cbind</span>(inkar_2020.spdf, w_vars)</span>
+<span id="cb48-315"><a href="#cb48-315" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-316"><a href="#cb48-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-317"><a href="#cb48-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-318"><a href="#cb48-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-319"><a href="#cb48-319" aria-hidden="true" tabindex="-1"></a><span class="fu">### 6) Can you run a spatial machine learning model? (for instance, using `randomForest`)?</span></span>
 <span id="cb48-320"><a href="#cb48-320" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-321"><a href="#cb48-321" aria-hidden="true" tabindex="-1"></a><span class="co"># Train</span></span>
-<span id="cb48-322"><a href="#cb48-322" aria-hidden="true" tabindex="-1"></a>rf.mod <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(life_expectancy <span class="sc">~</span> median_income <span class="sc">+</span> unemployment_rate <span class="sc">+</span> share_college <span class="sc">+</span> car_density <span class="sc">+</span></span>
-<span id="cb48-323"><a href="#cb48-323" aria-hidden="true" tabindex="-1"></a>                         w.median_income <span class="sc">+</span> w.unemployment_rate <span class="sc">+</span> w.share_college <span class="sc">+</span> w.car_density,</span>
-<span id="cb48-324"><a href="#cb48-324" aria-hidden="true" tabindex="-1"></a>                       <span class="at">data =</span> <span class="fu">st_drop_geometry</span>(inkar_2020.spdf), </span>
-<span id="cb48-325"><a href="#cb48-325" aria-hidden="true" tabindex="-1"></a>                       <span class="at">ntree =</span> <span class="dv">1000</span>,</span>
-<span id="cb48-326"><a href="#cb48-326" aria-hidden="true" tabindex="-1"></a>                       <span class="at">importance =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb48-327"><a href="#cb48-327" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-328"><a href="#cb48-328" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the mechanics of the model</span></span>
-<span id="cb48-329"><a href="#cb48-329" aria-hidden="true" tabindex="-1"></a><span class="fu">importance</span>(rf.mod)</span>
-<span id="cb48-330"><a href="#cb48-330" aria-hidden="true" tabindex="-1"></a><span class="fu">varImpPlot</span>(rf.mod)</span>
-<span id="cb48-331"><a href="#cb48-331" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-323"><a href="#cb48-323" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-324"><a href="#cb48-324" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(randomForest)</span>
+<span id="cb48-325"><a href="#cb48-325" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-326"><a href="#cb48-326" aria-hidden="true" tabindex="-1"></a><span class="co"># Train</span></span>
+<span id="cb48-327"><a href="#cb48-327" aria-hidden="true" tabindex="-1"></a>rf.mod <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(life_expectancy <span class="sc">~</span> median_income <span class="sc">+</span> unemployment_rate <span class="sc">+</span> share_college <span class="sc">+</span> car_density <span class="sc">+</span></span>
+<span id="cb48-328"><a href="#cb48-328" aria-hidden="true" tabindex="-1"></a>                         w.median_income <span class="sc">+</span> w.unemployment_rate <span class="sc">+</span> w.share_college <span class="sc">+</span> w.car_density,</span>
+<span id="cb48-329"><a href="#cb48-329" aria-hidden="true" tabindex="-1"></a>                       <span class="at">data =</span> <span class="fu">st_drop_geometry</span>(inkar_2020.spdf), </span>
+<span id="cb48-330"><a href="#cb48-330" aria-hidden="true" tabindex="-1"></a>                       <span class="at">ntree =</span> <span class="dv">1000</span>,</span>
+<span id="cb48-331"><a href="#cb48-331" aria-hidden="true" tabindex="-1"></a>                       <span class="at">importance =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb48-332"><a href="#cb48-332" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-333"><a href="#cb48-333" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-334"><a href="#cb48-334" aria-hidden="true" tabindex="-1"></a>You could even go further and use higher order neighbours (e.g. <span class="in">`nblag(queens.nb, maxlag = 3)`</span>) to check the importance of direct neighbours and the neighbours neighbours and so on ...</span>
-<span id="cb48-335"><a href="#cb48-335" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-336"><a href="#cb48-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-333"><a href="#cb48-333" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the mechanics of the model</span></span>
+<span id="cb48-334"><a href="#cb48-334" aria-hidden="true" tabindex="-1"></a><span class="fu">importance</span>(rf.mod)</span>
+<span id="cb48-335"><a href="#cb48-335" aria-hidden="true" tabindex="-1"></a><span class="fu">varImpPlot</span>(rf.mod)</span>
+<span id="cb48-336"><a href="#cb48-336" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb48-337"><a href="#cb48-337" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-338"><a href="#cb48-338" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-341"><a href="#cb48-341" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb48-342"><a href="#cb48-342" aria-hidden="true" tabindex="-1"></a><span class="co"># Create higher order NB object</span></span>
-<span id="cb48-343"><a href="#cb48-343" aria-hidden="true" tabindex="-1"></a>listw.lag <span class="ot">&lt;-</span> <span class="fu">nblag</span>(nb, <span class="at">maxlag =</span> <span class="dv">3</span>)</span>
-<span id="cb48-344"><a href="#cb48-344" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-345"><a href="#cb48-345" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-346"><a href="#cb48-346" aria-hidden="true" tabindex="-1"></a><span class="co"># Create listwise of 1st, 2nd and 3rd order neighbours</span></span>
-<span id="cb48-347"><a href="#cb48-347" aria-hidden="true" tabindex="-1"></a>listw.lw1 <span class="ot">&lt;-</span> <span class="fu">nb2listw</span>(listw.lag[[<span class="dv">1</span>]], <span class="at">style =</span> <span class="st">"W"</span>)</span>
-<span id="cb48-348"><a href="#cb48-348" aria-hidden="true" tabindex="-1"></a>listw.lw2 <span class="ot">&lt;-</span> <span class="fu">nb2listw</span>(listw.lag[[<span class="dv">2</span>]], <span class="at">style =</span> <span class="st">"W"</span>)</span>
-<span id="cb48-349"><a href="#cb48-349" aria-hidden="true" tabindex="-1"></a>listw.lw3 <span class="ot">&lt;-</span> <span class="fu">nb2listw</span>(listw.lag[[<span class="dv">3</span>]], <span class="at">style =</span> <span class="st">"W"</span>)</span>
+<span id="cb48-339"><a href="#cb48-339" aria-hidden="true" tabindex="-1"></a>You could even go further and use higher order neighbours (e.g. <span class="in">`nblag(queens.nb, maxlag = 3)`</span>) to check the importance of direct neighbours and the neighbours neighbours and so on ...</span>
+<span id="cb48-340"><a href="#cb48-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-341"><a href="#cb48-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-342"><a href="#cb48-342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-343"><a href="#cb48-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-346"><a href="#cb48-346" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-347"><a href="#cb48-347" aria-hidden="true" tabindex="-1"></a><span class="co"># Create higher order NB object</span></span>
+<span id="cb48-348"><a href="#cb48-348" aria-hidden="true" tabindex="-1"></a>listw.lag <span class="ot">&lt;-</span> <span class="fu">nblag</span>(nb, <span class="at">maxlag =</span> <span class="dv">3</span>)</span>
+<span id="cb48-349"><a href="#cb48-349" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-350"><a href="#cb48-350" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-351"><a href="#cb48-351" aria-hidden="true" tabindex="-1"></a><span class="co"># Create lagged X</span></span>
-<span id="cb48-352"><a href="#cb48-352" aria-hidden="true" tabindex="-1"></a>w_vars2 <span class="ot">&lt;-</span> <span class="fu">create_WX</span>(<span class="fu">st_drop_geometry</span>(inkar_2020.spdf)[, covars],</span>
-<span id="cb48-353"><a href="#cb48-353" aria-hidden="true" tabindex="-1"></a>                    <span class="at">listw =</span> listw.lw2,</span>
-<span id="cb48-354"><a href="#cb48-354" aria-hidden="true" tabindex="-1"></a>                    <span class="at">prefix =</span> <span class="st">"w2"</span>)</span>
+<span id="cb48-351"><a href="#cb48-351" aria-hidden="true" tabindex="-1"></a><span class="co"># Create listwise of 1st, 2nd and 3rd order neighbours</span></span>
+<span id="cb48-352"><a href="#cb48-352" aria-hidden="true" tabindex="-1"></a>listw.lw1 <span class="ot">&lt;-</span> <span class="fu">nb2listw</span>(listw.lag[[<span class="dv">1</span>]], <span class="at">style =</span> <span class="st">"W"</span>)</span>
+<span id="cb48-353"><a href="#cb48-353" aria-hidden="true" tabindex="-1"></a>listw.lw2 <span class="ot">&lt;-</span> <span class="fu">nb2listw</span>(listw.lag[[<span class="dv">2</span>]], <span class="at">style =</span> <span class="st">"W"</span>)</span>
+<span id="cb48-354"><a href="#cb48-354" aria-hidden="true" tabindex="-1"></a>listw.lw3 <span class="ot">&lt;-</span> <span class="fu">nb2listw</span>(listw.lag[[<span class="dv">3</span>]], <span class="at">style =</span> <span class="st">"W"</span>)</span>
 <span id="cb48-355"><a href="#cb48-355" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-356"><a href="#cb48-356" aria-hidden="true" tabindex="-1"></a>w_vars3 <span class="ot">&lt;-</span> <span class="fu">create_WX</span>(<span class="fu">st_drop_geometry</span>(inkar_2020.spdf)[, covars],</span>
-<span id="cb48-357"><a href="#cb48-357" aria-hidden="true" tabindex="-1"></a>                    <span class="at">listw =</span> listw.lw3,</span>
-<span id="cb48-358"><a href="#cb48-358" aria-hidden="true" tabindex="-1"></a>                    <span class="at">prefix =</span> <span class="st">"w3"</span>)</span>
-<span id="cb48-359"><a href="#cb48-359" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-360"><a href="#cb48-360" aria-hidden="true" tabindex="-1"></a>inkar_2020.spdf <span class="ot">&lt;-</span> <span class="fu">cbind</span>(inkar_2020.spdf, w_vars2, w_vars3)</span>
-<span id="cb48-361"><a href="#cb48-361" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-362"><a href="#cb48-362" aria-hidden="true" tabindex="-1"></a><span class="co"># Train</span></span>
-<span id="cb48-363"><a href="#cb48-363" aria-hidden="true" tabindex="-1"></a>rf.mod <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(life_expectancy <span class="sc">~</span> median_income <span class="sc">+</span> unemployment_rate <span class="sc">+</span> share_college <span class="sc">+</span> car_density <span class="sc">+</span></span>
-<span id="cb48-364"><a href="#cb48-364" aria-hidden="true" tabindex="-1"></a>                         w.median_income <span class="sc">+</span> w.unemployment_rate <span class="sc">+</span> w.share_college <span class="sc">+</span> w.car_density <span class="sc">+</span></span>
-<span id="cb48-365"><a href="#cb48-365" aria-hidden="true" tabindex="-1"></a>                         w2.median_income <span class="sc">+</span> w2.unemployment_rate <span class="sc">+</span> w2.share_college <span class="sc">+</span> w2.car_density <span class="sc">+</span></span>
-<span id="cb48-366"><a href="#cb48-366" aria-hidden="true" tabindex="-1"></a>                         w3.median_income <span class="sc">+</span> w3.unemployment_rate <span class="sc">+</span> w3.share_college <span class="sc">+</span> w3.car_density,</span>
-<span id="cb48-367"><a href="#cb48-367" aria-hidden="true" tabindex="-1"></a>                       <span class="at">data =</span> <span class="fu">st_drop_geometry</span>(inkar_2020.spdf), </span>
-<span id="cb48-368"><a href="#cb48-368" aria-hidden="true" tabindex="-1"></a>                       <span class="at">ntree =</span> <span class="dv">1000</span>,</span>
-<span id="cb48-369"><a href="#cb48-369" aria-hidden="true" tabindex="-1"></a>                       <span class="at">importance =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb48-370"><a href="#cb48-370" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-371"><a href="#cb48-371" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the mechanics of the model</span></span>
-<span id="cb48-372"><a href="#cb48-372" aria-hidden="true" tabindex="-1"></a><span class="fu">importance</span>(rf.mod)</span>
-<span id="cb48-373"><a href="#cb48-373" aria-hidden="true" tabindex="-1"></a><span class="fu">varImpPlot</span>(rf.mod)</span>
-<span id="cb48-374"><a href="#cb48-374" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-356"><a href="#cb48-356" aria-hidden="true" tabindex="-1"></a><span class="co"># Create lagged X</span></span>
+<span id="cb48-357"><a href="#cb48-357" aria-hidden="true" tabindex="-1"></a>w_vars2 <span class="ot">&lt;-</span> <span class="fu">create_WX</span>(<span class="fu">st_drop_geometry</span>(inkar_2020.spdf)[, covars],</span>
+<span id="cb48-358"><a href="#cb48-358" aria-hidden="true" tabindex="-1"></a>                    <span class="at">listw =</span> listw.lw2,</span>
+<span id="cb48-359"><a href="#cb48-359" aria-hidden="true" tabindex="-1"></a>                    <span class="at">prefix =</span> <span class="st">"w2"</span>)</span>
+<span id="cb48-360"><a href="#cb48-360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-361"><a href="#cb48-361" aria-hidden="true" tabindex="-1"></a>w_vars3 <span class="ot">&lt;-</span> <span class="fu">create_WX</span>(<span class="fu">st_drop_geometry</span>(inkar_2020.spdf)[, covars],</span>
+<span id="cb48-362"><a href="#cb48-362" aria-hidden="true" tabindex="-1"></a>                    <span class="at">listw =</span> listw.lw3,</span>
+<span id="cb48-363"><a href="#cb48-363" aria-hidden="true" tabindex="-1"></a>                    <span class="at">prefix =</span> <span class="st">"w3"</span>)</span>
+<span id="cb48-364"><a href="#cb48-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-365"><a href="#cb48-365" aria-hidden="true" tabindex="-1"></a>inkar_2020.spdf <span class="ot">&lt;-</span> <span class="fu">cbind</span>(inkar_2020.spdf, w_vars2, w_vars3)</span>
+<span id="cb48-366"><a href="#cb48-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-367"><a href="#cb48-367" aria-hidden="true" tabindex="-1"></a><span class="co"># Train</span></span>
+<span id="cb48-368"><a href="#cb48-368" aria-hidden="true" tabindex="-1"></a>rf.mod <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(life_expectancy <span class="sc">~</span> median_income <span class="sc">+</span> unemployment_rate <span class="sc">+</span> share_college <span class="sc">+</span> car_density <span class="sc">+</span></span>
+<span id="cb48-369"><a href="#cb48-369" aria-hidden="true" tabindex="-1"></a>                         w.median_income <span class="sc">+</span> w.unemployment_rate <span class="sc">+</span> w.share_college <span class="sc">+</span> w.car_density <span class="sc">+</span></span>
+<span id="cb48-370"><a href="#cb48-370" aria-hidden="true" tabindex="-1"></a>                         w2.median_income <span class="sc">+</span> w2.unemployment_rate <span class="sc">+</span> w2.share_college <span class="sc">+</span> w2.car_density <span class="sc">+</span></span>
+<span id="cb48-371"><a href="#cb48-371" aria-hidden="true" tabindex="-1"></a>                         w3.median_income <span class="sc">+</span> w3.unemployment_rate <span class="sc">+</span> w3.share_college <span class="sc">+</span> w3.car_density,</span>
+<span id="cb48-372"><a href="#cb48-372" aria-hidden="true" tabindex="-1"></a>                       <span class="at">data =</span> <span class="fu">st_drop_geometry</span>(inkar_2020.spdf), </span>
+<span id="cb48-373"><a href="#cb48-373" aria-hidden="true" tabindex="-1"></a>                       <span class="at">ntree =</span> <span class="dv">1000</span>,</span>
+<span id="cb48-374"><a href="#cb48-374" aria-hidden="true" tabindex="-1"></a>                       <span class="at">importance =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb48-375"><a href="#cb48-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-376"><a href="#cb48-376" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the mechanics of the model</span></span>
+<span id="cb48-377"><a href="#cb48-377" aria-hidden="true" tabindex="-1"></a><span class="fu">importance</span>(rf.mod)</span>
+<span id="cb48-378"><a href="#cb48-378" aria-hidden="true" tabindex="-1"></a><span class="fu">varImpPlot</span>(rf.mod)</span>
+<span id="cb48-379"><a href="#cb48-379" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

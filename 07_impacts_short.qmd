@@ -1,3 +1,5 @@
+::: {.content-hidden unless-format="html"}
+$$
 \newcommand{\Exp}{\mathrm{E}}
 \newcommand\given[1][]{\:#1\vert\:}
 \newcommand{\Cov}{\mathrm{Cov}}
@@ -8,6 +10,8 @@
 \newcommand{\irow}[1]{%
 \begin{pmatrix}#1\end{pmatrix}
 }
+$$
+:::
 
 # Spatial Impacts
 
@@ -187,7 +191,7 @@ $$
 \end{split}
 $$
 
-As you can see, $(\bm I_N - \rho \bm W)^{-1}$ has \color{red}{diagonal elements} $>1$: these are feedback loops. My $X$ influences my $Y$ directly, but my $Y$ then influences my neigbour's $Y$, which then influences my $Y$ again (also also other neighbour's $Y$s). Thus the influence of my $X$ on my $Y$ includes a spatial multiplier.
+As you can see, $(\bm I_N - \rho \bm W)^{-1}$ has $\color{red}{diagonal~elements}$ $>1$: these are feedback loops. My $X$ influences my $Y$ directly, but my $Y$ then influences my neigbour's $Y$, which then influences my $Y$ again (also also other neighbour's $Y$s). Thus the influence of my $X$ on my $Y$ includes a spatial multiplier.
 
 Check yourself:
 
@@ -566,7 +570,7 @@ In theory, we would
 
 2) subsequently restrict the model to simplified specifications based on the significance of parameters in the GNS. 
 
-The problem with this strategy is that the GNS is only weakly identified and, thus, is of little help in selecting the correct restrictions \citep{Burridge.2016}. 
+The problem with this strategy is that the GNS is only weakly identified and, thus, is of little help in selecting the correct restrictions [@Burridge.2016]. 
 
 The most intuitive alternative would be to start with one of the two-source models SDM, SDEM, or SAC. This, however, bears the risk of imposing the wrong restriction in the first place [@Cook.2020]. Furthermore, @Cook.2020 show that more complicated restrictions are necessary to derive all single-source models from SDEM or SAC specifications.
 
