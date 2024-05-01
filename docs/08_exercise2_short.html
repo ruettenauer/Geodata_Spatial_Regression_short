@@ -112,7 +112,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <a href="./">Spatial Data Analysis</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/ruettenauer/Geodata_Spatial_Regression_short/" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <a href="./Spatial-Data-Analysis.pdf" rel="" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
@@ -556,24 +555,24 @@ Sample size per chain = 300
    plus standard error of the mean:
 
                    Mean        SD  Naive SE Time-series SE
-per_mixed     6.800e-04 0.0022710 1.311e-04      1.311e-04
-per_asian    -9.259e-05 0.0001711 9.877e-06      9.877e-06
-per_black    -6.341e-04 0.0003511 2.027e-05      2.027e-05
-per_other     2.852e-03 0.0010000 5.773e-05      5.773e-05
-per_nonUK_EU  1.279e-03 0.0005384 3.109e-05      2.880e-05
-per_nonEU     2.614e-03 0.0005052 2.917e-05      2.917e-05
-log(POPDEN)   2.722e-02 0.0038099 2.200e-04      2.200e-04
+per_mixed     0.0006290 0.0021515 1.242e-04      1.242e-04
+per_asian    -0.0001198 0.0001745 1.007e-05      9.506e-06
+per_black    -0.0006360 0.0003383 1.953e-05      1.953e-05
+per_other     0.0028917 0.0011012 6.358e-05      6.358e-05
+per_nonUK_EU  0.0012287 0.0005869 3.388e-05      3.388e-05
+per_nonEU     0.0026579 0.0005215 3.011e-05      3.011e-05
+log(POPDEN)   0.0268259 0.0039352 2.272e-04      2.272e-04
 
 2. Quantiles for each variable:
 
                    2.5%        25%        50%        75%     97.5%
-per_mixed    -0.0035235 -0.0009485  0.0007113  2.216e-03 4.967e-03
-per_asian    -0.0004007 -0.0002095 -0.0001075  1.787e-05 2.656e-04
-per_black    -0.0013209 -0.0008559 -0.0006368 -3.807e-04 3.361e-05
-per_other     0.0008672  0.0022864  0.0027634  3.480e-03 4.953e-03
-per_nonUK_EU  0.0001046  0.0009682  0.0012634  1.614e-03 2.266e-03
-per_nonEU     0.0016845  0.0022839  0.0026333  2.953e-03 3.584e-03
-log(POPDEN)   0.0199059  0.0246439  0.0273128  2.987e-02 3.382e-02
+per_mixed    -3.827e-03 -0.0007547  0.0006964  2.161e-03 4.419e-03
+per_asian    -4.861e-04 -0.0002168 -0.0001131 -5.023e-06 1.970e-04
+per_black    -1.298e-03 -0.0008304 -0.0006485 -4.257e-04 6.152e-05
+per_other     9.995e-04  0.0020405  0.0028719  3.625e-03 5.070e-03
+per_nonUK_EU  3.855e-05  0.0008247  0.0012489  1.635e-03 2.382e-03
+per_nonEU     1.665e-03  0.0023344  0.0026625  2.934e-03 3.719e-03
+log(POPDEN)   1.916e-02  0.0242278  0.0268096  2.959e-02 3.369e-02
 
 ========================================================
 Indirect:
@@ -586,25 +585,25 @@ Sample size per chain = 300
 1. Empirical mean and standard deviation for each variable,
    plus standard error of the mean:
 
-                 Mean       SD  Naive SE Time-series SE
-per_mixed     0.01519 0.050693 0.0029268      0.0029663
-per_asian    -0.00205 0.003936 0.0002273      0.0002273
-per_black    -0.01384 0.008537 0.0004929      0.0004929
-per_other     0.06197 0.025536 0.0014743      0.0014743
-per_nonUK_EU  0.02734 0.012152 0.0007016      0.0007505
-per_nonEU     0.05714 0.017564 0.0010141      0.0010141
-log(POPDEN)   0.58815 0.125128 0.0072243      0.0072243
+                  Mean       SD  Naive SE Time-series SE
+per_mixed     0.012864 0.050341 0.0029064      0.0029064
+per_asian    -0.002726 0.004235 0.0002445      0.0002285
+per_black    -0.013862 0.008827 0.0005097      0.0005097
+per_other     0.062871 0.029156 0.0016833      0.0016833
+per_nonUK_EU  0.026055 0.012921 0.0007460      0.0007460
+per_nonEU     0.058273 0.021248 0.0012267      0.0012267
+log(POPDEN)   0.579798 0.138802 0.0080137      0.0080137
 
 2. Quantiles for each variable:
 
-                  2.5%       25%      50%        75%     97.5%
-per_mixed    -0.081103 -0.018639  0.01516  0.0495997 0.1191921
-per_asian    -0.009157 -0.004675 -0.00216  0.0004143 0.0055830
-per_black    -0.033449 -0.018830 -0.01329 -0.0081513 0.0007166
-per_other     0.018597  0.046179  0.05897  0.0733611 0.1187995
-per_nonUK_EU  0.002502  0.020113  0.02698  0.0338821 0.0519077
-per_nonEU     0.030008  0.046355  0.05515  0.0642058 0.1000690
-log(POPDEN)   0.399116  0.496140  0.56955  0.6576800 0.8764408
+                 2.5%      25%       50%        75%    97.5%
+per_mixed    -0.08134 -0.01628  0.014219  4.466e-02 0.093136
+per_asian    -0.01218 -0.00489 -0.002383 -9.328e-05 0.004075
+per_black    -0.02880 -0.01909 -0.013133 -8.606e-03 0.001124
+per_other     0.02104  0.04230  0.059895  7.821e-02 0.119970
+per_nonUK_EU  0.00100  0.01768  0.025476  3.338e-02 0.053705
+per_nonEU     0.03309  0.04539  0.055598  6.570e-02 0.097426
+log(POPDEN)   0.36831  0.48458  0.563189  6.568e-01 0.853630
 
 ========================================================
 Total:
@@ -618,24 +617,24 @@ Sample size per chain = 300
    plus standard error of the mean:
 
                   Mean       SD  Naive SE Time-series SE
-per_mixed     0.015868 0.052918 0.0030552      0.0030930
-per_asian    -0.002142 0.004103 0.0002369      0.0002369
-per_black    -0.014475 0.008862 0.0005117      0.0005117
-per_other     0.064819 0.026405 0.0015245      0.0015245
-per_nonUK_EU  0.028616 0.012626 0.0007290      0.0007177
-per_nonEU     0.059757 0.017933 0.0010353      0.0010353
-log(POPDEN)   0.615371 0.126880 0.0073254      0.0073254
+per_mixed     0.013493 0.052405 0.0030256      0.0030256
+per_asian    -0.002846 0.004401 0.0002541      0.0002375
+per_black    -0.014498 0.009134 0.0005274      0.0005274
+per_other     0.065763 0.030096 0.0017376      0.0017376
+per_nonUK_EU  0.027283 0.013461 0.0007772      0.0007772
+per_nonEU     0.060931 0.021644 0.0012496      0.0012496
+log(POPDEN)   0.606624 0.140899 0.0081348      0.0081348
 
 2. Quantiles for each variable:
 
-                  2.5%       25%       50%        75%     97.5%
-per_mixed    -0.083807 -0.019472  0.015896  0.0519753 0.1229114
-per_asian    -0.009527 -0.004868 -0.002275  0.0004299 0.0058638
-per_black    -0.034544 -0.019628 -0.013942 -0.0085527 0.0007494
-per_other     0.019464  0.048386  0.061849  0.0763229 0.1227072
-per_nonUK_EU  0.002608  0.021152  0.028136  0.0355232 0.0543880
-per_nonEU     0.031796  0.048853  0.057742  0.0672532 0.1032455
-log(POPDEN)   0.417314  0.521477  0.598300  0.6860475 0.9008017</code></pre>
+                  2.5%       25%       50%       75%    97.5%
+per_mixed    -0.084945 -0.017213  0.014974  0.046660 0.097314
+per_asian    -0.012624 -0.005098 -0.002513 -0.000098 0.004275
+per_black    -0.029797 -0.020036 -0.013809 -0.009053 0.001185
+per_other     0.022118  0.044524  0.062740  0.081491 0.124774
+per_nonUK_EU  0.001039  0.018489  0.026746  0.035081 0.056067
+per_nonEU     0.035101  0.048061  0.058173  0.068653 0.101046
+log(POPDEN)   0.390419  0.511445  0.591754  0.683240 0.884687</code></pre>
 </div>
 </div>
 <p>For SLX, you can just interpret the coefficients. Impacts will give you the same results.</p>
@@ -906,14 +905,14 @@ car_density       1.214e-10  0.0029151 8.6746e-06</code></pre>
 <span><span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/importance.html">importance</a></span><span class="op">(</span><span class="va">rf.mod</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                     %IncMSE IncNodePurity
-median_income       34.03645      40.91834
-unemployment_rate   64.97511     115.50583
-share_college       22.00718      25.91124
-car_density         25.20195      33.90758
-w.median_income     36.21939      57.65676
-w.unemployment_rate 25.04768      53.52908
-w.share_college     16.97143      24.10762
-w.car_density       24.27691      31.52306</code></pre>
+median_income       33.60659      40.78685
+unemployment_rate   64.62806     114.71155
+share_college       22.82387      26.27735
+car_density         23.51385      32.96287
+w.median_income     36.80049      58.60537
+w.unemployment_rate 25.87530      53.53837
+w.share_college     17.79590      23.29938
+w.car_density       22.88666      30.58426</code></pre>
 </div>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/varImpPlot.html">varImpPlot</a></span><span class="op">(</span><span class="va">rf.mod</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -955,22 +954,22 @@ w.car_density       24.27691      31.52306</code></pre>
 <span><span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/importance.html">importance</a></span><span class="op">(</span><span class="va">rf.mod</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                       %IncMSE IncNodePurity
-median_income        29.683451     22.771267
-unemployment_rate    61.152787    112.686387
-share_college        20.939773     16.455557
-car_density          18.722195     16.203169
-w.median_income      29.032704     37.273706
-w.unemployment_rate  19.411745     24.360074
-w.share_college      12.276134      9.474994
-w.car_density        17.882999     12.423058
-w2.median_income     22.231137     21.572744
-w2.unemployment_rate 14.455514     23.923654
-w2.share_college     13.873830     12.738961
-w2.car_density       12.539108     13.292469
-w3.median_income     15.992052     15.743698
-w3.unemployment_rate 18.499035     25.645470
-w3.share_college      8.720745     10.104429
-w3.car_density        8.589453     12.864967</code></pre>
+median_income        27.698772     23.107581
+unemployment_rate    61.408198    111.652254
+share_college        22.900494     17.460207
+car_density          19.633700     16.759375
+w.median_income      28.809540     36.364268
+w.unemployment_rate  16.679323     24.988638
+w.share_college      11.884784      9.512635
+w.car_density        17.127785     13.527587
+w2.median_income     21.241519     19.556860
+w2.unemployment_rate 14.932238     24.966208
+w2.share_college     14.712295     12.168590
+w2.car_density       11.148194     12.264224
+w3.median_income     16.685965     16.188840
+w3.unemployment_rate 17.785560     25.537481
+w3.share_college      8.743832     10.353950
+w3.car_density        8.991503     12.893037</code></pre>
 </div>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/varImpPlot.html">varImpPlot</a></span><span class="op">(</span><span class="va">rf.mod</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">

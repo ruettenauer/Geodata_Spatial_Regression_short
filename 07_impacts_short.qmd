@@ -521,7 +521,7 @@ Lagrange Multiplier test [@Anselin.1996]:
 		
 Robust test for lag dependence: $H_0$: $\rho=0$ 
 $$
-		LM_\rho^* = G^{-1} \hat{\sigma}_\epsilon^2
+LM_\rho^* = G^{-1} \hat{\sigma}_\epsilon^2
 		\big(\frac{ \hat{\bm\epsilon}^\intercal \bm{Wy}}{\hat{\sigma}_\epsilon^2}
 		- \frac{\hat{\bm \epsilon}^\intercal \bm{W\hat{\epsilon}}}{\hat{\sigma}_\epsilon^2} \big)^2 \sim \chi^2 
 $$
@@ -530,7 +530,7 @@ $$
 Robust test for error dependence: $H_0$: $\lambda=0$ 
 
 $$
-		LM_\lambda^* = \frac{
+LM_\lambda^* = \frac{
 		\big( \hat{\bm\epsilon}^\intercal \bm{W\hat{\epsilon}} / \hat{\sigma}_\epsilon^2		
 		- [T\hat{\sigma}_\epsilon^2(G + T\hat{\sigma}_\epsilon^2)^{-1}]
 		 \hat{\bm\epsilon}^\intercal \bm{Wy} / \hat{\sigma}_\epsilon^2 \big)^2

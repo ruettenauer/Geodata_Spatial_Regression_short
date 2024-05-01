@@ -131,7 +131,6 @@ div.csl-indent {
       <a href="./">Spatial Data Analysis</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/ruettenauer/Geodata_Spatial_Regression_short/" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <a href="./Spatial-Data-Analysis.pdf" rel="" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
@@ -739,31 +738,31 @@ per_other   -0.001820705 -0.003067212 -0.004887917
 Simulation results ( variance matrix):
 ========================================================
 Simulated standard errors
-                  Direct     Indirect       Total
-log(no2)    0.0471443896 0.0961388132 0.131847219
-log(POPDEN) 0.0144486774 0.0264169250 0.040078741
-per_mixed   0.0063828981 0.0112090011 0.017397327
-per_asian   0.0005440795 0.0008713069 0.001374171
-per_black   0.0010517710 0.0021671020 0.002690620
-per_other   0.0034401571 0.0059775541 0.009405043
+                  Direct    Indirect       Total
+log(no2)    0.0487078173 0.090479556 0.125908041
+log(POPDEN) 0.0140162644 0.026360450 0.039428607
+per_mixed   0.0064895376 0.011442028 0.017678433
+per_asian   0.0004917008 0.000850312 0.001296960
+per_black   0.0010477364 0.002216394 0.002666837
+per_other   0.0030979450 0.005266768 0.008352812
 
 Simulated z-values:
                  Direct    Indirect       Total
-log(no2)      9.6647056   7.9517091   9.2539269
-log(POPDEN)  -4.4602546  -4.1027782  -4.3122004
-per_mixed     3.2546484   3.1143407   3.2006491
-per_asian    -4.7957945  -5.0017765  -5.0702380
-per_black   -13.5797030 -11.0435775 -14.2031561
-per_other    -0.5260023  -0.5305485  -0.5296002
+log(no2)      9.1916445   8.3457380   9.5531914
+log(POPDEN)  -4.5765206  -4.1210950  -4.3820884
+per_mixed     3.2487921   3.1144258   3.2083445
+per_asian    -5.2434966  -5.1094044  -5.3377280
+per_black   -13.6163386 -10.8598473 -14.3750966
+per_other    -0.5930732  -0.5949817  -0.5951216
 
 Simulated p-values:
             Direct     Indirect   Total     
-log(no2)    &lt; 2.22e-16 1.7764e-15 &lt; 2.22e-16
-log(POPDEN) 8.1862e-06 4.0822e-05 1.6164e-05
-per_mixed   0.0011353  0.0018436  0.0013712 
-per_asian   1.6203e-06 5.6804e-07 3.9732e-07
+log(no2)    &lt; 2.22e-16 &lt; 2.22e-16 &lt; 2.22e-16
+log(POPDEN) 4.7277e-06 3.7708e-05 1.1755e-05
+per_mixed   0.001159   0.001843   0.001335  
+per_asian   1.5756e-07 3.2318e-07 9.4119e-08
 per_black   &lt; 2.22e-16 &lt; 2.22e-16 &lt; 2.22e-16
-per_other   0.5988866  0.5957317  0.5963891 </code></pre>
+per_other   0.553132   0.551856   0.551762  </code></pre>
 </div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Alternative with traces (better for large W)</span></span>
 <span><span class="va">W</span> <span class="op">&lt;-</span> <span class="fu">as</span><span class="op">(</span><span class="va">queens.lw</span>, <span class="st">"CsparseMatrix"</span><span class="op">)</span></span>
@@ -788,30 +787,30 @@ Simulation results ( variance matrix):
 ========================================================
 Simulated standard errors
                   Direct     Indirect       Total
-log(no2)    0.0472008856 0.0899006803 0.126171687
-log(POPDEN) 0.0135389561 0.0248391431 0.037622110
-per_mixed   0.0062657311 0.0113397782 0.017422033
-per_asian   0.0005111060 0.0008235602 0.001296933
-per_black   0.0009411836 0.0021719937 0.002625997
-per_other   0.0032185481 0.0055195057 0.008729329
+log(no2)    0.0510611209 0.1012169813 0.139155338
+log(POPDEN) 0.0148671378 0.0281048089 0.042099676
+per_mixed   0.0065169428 0.0117688435 0.018055233
+per_asian   0.0004877744 0.0008383776 0.001274375
+per_black   0.0010514891 0.0022248586 0.002636989
+per_other   0.0028628871 0.0049506575 0.007801005
 
 Simulated z-values:
                  Direct    Indirect       Total
-log(no2)      9.4873263   8.4208512   9.5492934
-log(POPDEN)  -4.6251393  -4.2721683  -4.4850370
-per_mixed     3.3302710   3.1263263   3.2325980
-per_asian    -5.0644833  -5.2949991  -5.3582105
-per_black   -15.1162453 -11.0781735 -14.5807020
-per_other    -0.5394061  -0.5460176  -0.5441257
+log(no2)      8.8096993   7.5084257   8.6939769
+log(POPDEN)  -4.2503453  -3.8166054  -4.0488538
+per_mixed     3.2188233   3.0201492   3.1304248
+per_asian    -5.2513729  -5.1496940  -5.3978416
+per_black   -13.5868319 -10.8397611 -14.5633292
+per_other    -0.6514309  -0.6529781  -0.6534599
 
 Simulated p-values:
             Direct     Indirect   Total     
-log(no2)    &lt; 2.22e-16 &lt; 2.22e-16 &lt; 2.22e-16
-log(POPDEN) 3.7435e-06 1.9358e-05 7.2901e-06
-per_mixed   0.00086762 0.0017701  0.0012267 
-per_asian   4.0951e-07 1.1902e-07 8.4050e-08
+log(no2)    &lt; 2.22e-16 5.9952e-14 &lt; 2.22e-16
+log(POPDEN) 2.1344e-05 0.0001353  5.1469e-05
+per_mixed   0.0012872  0.0025265  0.0017455 
+per_asian   1.5097e-07 2.6091e-07 6.7447e-08
 per_black   &lt; 2.22e-16 &lt; 2.22e-16 &lt; 2.22e-16
-per_other   0.58960667 0.5850538  0.5863550 </code></pre>
+per_other   0.5147683  0.5137704  0.5134598 </code></pre>
 </div>
 </div>
 <p>The indirect effects in SAR, SAC, and SDM refer to global spillover effects. This means a change of <span class="math inline">\(x\)</span> in the focal units flows through the entire system of neighbours (direct nieightbours, neighbours of neighbours, …) influencing ‘their <span class="math inline">\(y\)</span>’. One can think of this as diffusion or a change in a long-term equilibrium.</p>
@@ -866,13 +865,13 @@ per_other   -0.020391354  0.048139008  0.027747654</code></pre>
 <li><p>(Robust) test for spatial error dependence <span class="math inline">\(LM_\lambda^*\)</span></p></li>
 </ul>
 <p>Robust test for lag dependence: <span class="math inline">\(H_0\)</span>: <span class="math inline">\(\rho=0\)</span> <span class="math display">\[
-        LM_\rho^* = G^{-1} \hat{\sigma}_\epsilon^2
+LM_\rho^* = G^{-1} \hat{\sigma}_\epsilon^2
         \big(\frac{ \hat{\bm\epsilon}^\intercal \bm{Wy}}{\hat{\sigma}_\epsilon^2}
         - \frac{\hat{\bm \epsilon}^\intercal \bm{W\hat{\epsilon}}}{\hat{\sigma}_\epsilon^2} \big)^2 \sim \chi^2
 \]</span> <!-- %\\ \text{where } G = (\bm{WX\hat{\beta}})^\intercal (\bm I - \bm X (\bm X^\intercal\bm X)^{-1} \bm X^\intercal) (\bm{WX\hat{\beta}}) --></p>
 <p>Robust test for error dependence: <span class="math inline">\(H_0\)</span>: <span class="math inline">\(\lambda=0\)</span></p>
 <p><span class="math display">\[
-        LM_\lambda^* = \frac{
+LM_\lambda^* = \frac{
         \big( \hat{\bm\epsilon}^\intercal \bm{W\hat{\epsilon}} / \hat{\sigma}_\epsilon^2        
         - [T\hat{\sigma}_\epsilon^2(G + T\hat{\sigma}_\epsilon^2)^{-1}]
          \hat{\bm\epsilon}^\intercal \bm{Wy} / \hat{\sigma}_\epsilon^2 \big)^2
@@ -1820,7 +1819,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb17-533"><a href="#cb17-533" aria-hidden="true" tabindex="-1"></a>        </span>
 <span id="cb17-534"><a href="#cb17-534" aria-hidden="true" tabindex="-1"></a>Robust test for lag dependence: $H_0$: $\rho=0$ </span>
 <span id="cb17-535"><a href="#cb17-535" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb17-536"><a href="#cb17-536" aria-hidden="true" tabindex="-1"></a>        LM_\rho^* = G^{-1} \hat{\sigma}_\epsilon^2</span>
+<span id="cb17-536"><a href="#cb17-536" aria-hidden="true" tabindex="-1"></a>LM_\rho^* = G^{-1} \hat{\sigma}_\epsilon^2</span>
 <span id="cb17-537"><a href="#cb17-537" aria-hidden="true" tabindex="-1"></a>        \big(\frac{ \hat{\bm\epsilon}^\intercal \bm{Wy}}{\hat{\sigma}_\epsilon^2}</span>
 <span id="cb17-538"><a href="#cb17-538" aria-hidden="true" tabindex="-1"></a><span class="ss">        - </span>\frac{\hat{\bm \epsilon}^\intercal \bm{W\hat{\epsilon}}}{\hat{\sigma}_\epsilon^2} \big)^2 \sim \chi^2 </span>
 <span id="cb17-539"><a href="#cb17-539" aria-hidden="true" tabindex="-1"></a>$$</span>
@@ -1829,7 +1828,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb17-542"><a href="#cb17-542" aria-hidden="true" tabindex="-1"></a>Robust test for error dependence: $H_0$: $\lambda=0$ </span>
 <span id="cb17-543"><a href="#cb17-543" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-544"><a href="#cb17-544" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb17-545"><a href="#cb17-545" aria-hidden="true" tabindex="-1"></a>        LM_\lambda^* = \frac{</span>
+<span id="cb17-545"><a href="#cb17-545" aria-hidden="true" tabindex="-1"></a>LM_\lambda^* = \frac{</span>
 <span id="cb17-546"><a href="#cb17-546" aria-hidden="true" tabindex="-1"></a>        \big( \hat{\bm\epsilon}^\intercal \bm{W\hat{\epsilon}} / \hat{\sigma}_\epsilon^2        </span>
 <span id="cb17-547"><a href="#cb17-547" aria-hidden="true" tabindex="-1"></a><span class="ss">        - </span><span class="co">[</span><span class="ot">T\hat{\sigma}_\epsilon^2(G + T\hat{\sigma}_\epsilon^2)^{-1}</span><span class="co">]</span></span>
 <span id="cb17-548"><a href="#cb17-548" aria-hidden="true" tabindex="-1"></a>         \hat{\bm\epsilon}^\intercal \bm{Wy} / \hat{\sigma}_\epsilon^2 \big)^2</span>

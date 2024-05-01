@@ -23,8 +23,6 @@ book:
     # - 11_other.qmd
     # - 12_exercise2.qmd
     - references.qmd
-    
-  downloads: [pdf]  
 
 bibliography: references.bib
 
@@ -48,5 +46,3 @@ format:
   pdf: default
 
 pdf-engine: lualatex
-
-
